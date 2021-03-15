@@ -4,17 +4,25 @@ using System.Collections;
 
 using MadLevelManager;
 
-public class GameController : Singleton<GameController> {
+public class GameController {
 
-    //Insert FSM in this
+    #region singleton
+    private static readonly GameController instance = new GameController();
+    public static GameController Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+    #endregion
+
 
     private State[] m_States = new State[]{
         StateIdle.Instance,
         StateSplash.Instance,
         StateJigsawPuzzle.Instance,
-        //AndreaLIRO_TB: should look if this is actually used
         StateChapterSelect.Instance,
-
         StateChallenge.Instance,
         StateTutorialChallenge.Instance,
         StateInitializePinball.Instance,
@@ -33,7 +41,6 @@ public class GameController : Singleton<GameController> {
         StatePinball,
 		StateReward
     };
-
     private State m_CurState;
     private bool m_Initializtion = false;
 
@@ -51,9 +58,55 @@ public class GameController : Singleton<GameController> {
         }
         catch (System.Exception ex)
         {
-            Debug.LogError(string.Format("ERROR while changing state from {0}: {1}", m_CurState.ToString(), ex.Message));
+            ListenIn.Logger.Instance.Log(ex.Message, ListenIn.LoggerMessageType.Error);
         }
 
+    }
+
+    //DEPRECATED
+    public void Init()
+    {
+		if (!m_Initializtion)
+        {
+            m_Initializtion = true;
+            Application.targetFrameRate = 60;
+
+            //Setting the logger
+            GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/UI_Canvas_Debug"));
+            Text debug_text = go.GetComponentInChildren<Text>();
+            ListenIn.Logger.Instance.SetLoggerUIFrame(debug_text);
+            ListenIn.Logger.Instance.SetLoggerLogToExternal(true);
+            ListenIn.Logger.Instance.Log("Log started", ListenIn.LoggerMessageType.Info);
+
+            try
+            {
+                Debug.LogError("GameController: initializing database (is this a double initialization?)");
+                DatabaseXML.Instance.InitializeDatabase();
+                UploadManager.Instance.Initialize();
+                CUserTherapy.Instance.LoadDataset_UserProfile();
+                StateJigsawPuzzle.Instance.OnGameLoadedInitialization();                               
+
+                IMadLevelProfileBackend backend = MadLevelProfile.backend;
+                string profile = backend.LoadProfile(MadLevelProfile.DefaultProfile);
+                ListenIn.Logger.Instance.Log(string.Format("GameController: Loaded profile: {0}", profile), ListenIn.LoggerMessageType.Info);
+                //Debug.Log(profile);
+                
+                GameStateSaver.Instance.Load();
+                
+                ChangeState(States.Idle);
+                //ChangeState(States.Splash);
+            }
+            catch (System.Exception ex)
+            {
+                ListenIn.Logger.Instance.Log(ex.Message, ListenIn.LoggerMessageType.Error);
+            }
+            
+        }
+        else
+        {
+            ChangeState(States.Idle);
+        }
+        
     }
 
     public void Update()
@@ -67,7 +120,7 @@ public class GameController : Singleton<GameController> {
         }
         catch (System.Exception ex)
         {
-            Debug.LogError(string.Format("ERROR while updating state {0}: {1}", m_CurState.ToString(), ex.Message));
+            ListenIn.Logger.Instance.Log(ex.Message, ListenIn.LoggerMessageType.Error);
         }
 
     }

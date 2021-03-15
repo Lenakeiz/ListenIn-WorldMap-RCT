@@ -48,6 +48,7 @@ public class StateChallenge : State
         questions = 0;
         correctAnswers = 0;
 
+        DatabaseXML.Instance.SetTimerState(DatabaseXML.TimerType.Therapy, true);
     }
 
     // Update is called once per frame
@@ -55,15 +56,14 @@ public class StateChallenge : State
     {
         //Debug.Log("Coins : [" + coins + "];");
 #if UNITY_EDITOR
-        //AndreaLIRO: putting this on the GameControlScriptStandard to control normal process of closing the challenge therapy
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    AddCoin(10);
-        //    cheatActivated = true;
-        //    StatePinball.Instance.initialize = false;
-        //    GameController.Instance.ChangeState(GameController.States.StatePinball);
-        //    StatePinball.Instance.InitLevelPinball();
-        //}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AddCoin(10);
+			cheatActivated = true;
+            StatePinball.Instance.initialize = false;
+            GameController.Instance.ChangeState(GameController.States.StatePinball);
+            StatePinball.Instance.InitLevelPinball();
+        }
 #endif
     }
 
@@ -78,6 +78,7 @@ public class StateChallenge : State
         StatePinball.Instance.initialize = false;
 		cheatActivated = false;
 
+        DatabaseXML.Instance.SetTimerState(DatabaseXML.TimerType.Therapy, false);
     }
 
     private int coins ;
@@ -132,7 +133,7 @@ public class StateChallenge : State
 
 	public void UnlockChallenged()
 	{
-		m_GO.GetComponentInChildren<GameControlScriptStandard>().PlayAudioLIRO();
+		m_GO.GetComponentInChildren<GameControlScript>().PlayAudio();
 	}
 
     

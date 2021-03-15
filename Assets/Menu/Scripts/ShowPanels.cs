@@ -1,5 +1,4 @@
-﻿//#define DEBUG
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.Collections;
 
@@ -80,8 +79,8 @@ public class ShowPanels : MonoBehaviour {
 	public void ShowInitialMenu(bool inChallengeState)
 	{
         Time.timeScale = 0.0f;
-        UploadManager.Instance.ResetTimer(TimerType.Idle);
-        UploadManager.Instance.SetIsMenu = true;
+        DatabaseXML.Instance.ResetTimer(DatabaseXML.TimerType.Idle);
+        DatabaseXML.Instance.SetIsMenu = true;
 		gameObject.GetComponent<CanvasGroup>().alpha = 1;
 		challengePanel.GetComponent<CanvasGroup>().alpha = 1;
 		challengePanel.SetActive(true);
@@ -95,8 +94,8 @@ public class ShowPanels : MonoBehaviour {
 
 	public void HideInitialMenu()
 	{
-        UploadManager.Instance.ResetTimer(TimerType.Idle);
-        UploadManager.Instance.SetIsMenu = false;
+        DatabaseXML.Instance.ResetTimer(DatabaseXML.TimerType.Idle);
+        DatabaseXML.Instance.SetIsMenu = false;
         Time.timeScale = 1.0f;
 		challengePanel.SetActive(true);
 		menuPanel.SetActive(false);
@@ -105,14 +104,16 @@ public class ShowPanels : MonoBehaviour {
     public void ShowUploadUI()
     {
         //DatabaseXML.Instance.ResetTimer(DatabaseXML.TimerType.Idle);
-        UploadManager.Instance.SetIsMenu = false;
+        DatabaseXML.Instance.SetIsMenu = false;
         Time.timeScale = 1.0f;
         challengePanel.SetActive(false);
         menuPanel.SetActive(false);
         optionsTint.SetActive(false);
         UploadingMessageUI.SetActive(true);
     }
-        
+
+
+    
 	IEnumerator BackToChallenge(float waitTime)
 	{
         //Making this time scale independent
@@ -125,13 +126,13 @@ public class ShowPanels : MonoBehaviour {
         try
         {
             Time.timeScale = 1.0f;
-            UploadManager.Instance.ResetTimer(TimerType.Idle);
-            UploadManager.Instance.SetIsMenu = false;
+            DatabaseXML.Instance.ResetTimer(DatabaseXML.TimerType.Idle);
+            DatabaseXML.Instance.SetIsMenu = false;
             GameObject challenge = GameObject.Find("Challenge(Clone)");
 
             if (challenge != null)
             {
-                challenge.GetComponentInChildren<GameControlScriptStandard>().SetEnable(true);
+                challenge.GetComponentInChildren<GameControlScript>().SetEnable(true);
                 ReplaySound replayButton = challenge.GetComponentInChildren<ReplaySound>();
 
                 if (replayButton != null)
@@ -183,8 +184,8 @@ public class ShowPanels : MonoBehaviour {
         try
         {
             Time.timeScale = 1.0f;
-            UploadManager.Instance.ResetTimer(TimerType.Idle);
-            UploadManager.Instance.SetIsMenu = false;
+            DatabaseXML.Instance.ResetTimer(DatabaseXML.TimerType.Idle);
+            DatabaseXML.Instance.SetIsMenu = false;
         }
         catch (Exception ex)
         {
@@ -196,11 +197,7 @@ public class ShowPanels : MonoBehaviour {
             menuPanel.SetActive(false);
             optionsTint.SetActive(false);
             locked = false;
-//#if DEBUG
-//            StatePinball.Instance.m_PinballMono.UnlockAndFinishPinballGame(true);
-//#else
-//            StatePinball.Instance.m_PinballMono.UnlockAndFinishPinballGame(false);
-//#endif
+
             StatePinball.Instance.m_PinballMono.UnlockAndFinishPinballGame(false);
 
         }
@@ -222,8 +219,8 @@ public class ShowPanels : MonoBehaviour {
         try
         {
             Time.timeScale = 1.0f;
-            UploadManager.Instance.ResetTimer(TimerType.Idle);
-            UploadManager.Instance.SetIsMenu = false;
+            DatabaseXML.Instance.ResetTimer(DatabaseXML.TimerType.Idle);
+            DatabaseXML.Instance.SetIsMenu = false;
             challengePanel.SetActive(false);
             menuPanel.SetActive(false);
             optionsTint.SetActive(false);

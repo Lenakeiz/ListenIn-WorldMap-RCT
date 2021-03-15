@@ -138,7 +138,7 @@ public class StatePinball : State
 			jigsawPieceTransform.localPosition = Vector2.zero;//m_PinballMono.JigsawParents[BucketsShuffled[i]].GetComponent<RectTransform>().localPosition;
 			jigsawPieceTransform.localScale = Vector2.one * 0.015f;
 
-            Image currFiller = jigsawPieceTransform.Find("Progression").gameObject.GetComponent<Image>();
+            Image currFiller = jigsawPieceTransform.FindChild("Progression").gameObject.GetComponent<Image>();
 
             //Initialize cardbucketcontroller
             m_PinballMono.Buckets[BucketsShuffled[i]].Init(intList[i], thisChapter.JigsawPeicesUnlocked[intList[i]], ID, currFiller);
@@ -157,7 +157,7 @@ public class StatePinball : State
 
         if (go == null)
         {
-            Debug.LogError("Pinball gameobject not found in StatePinball");
+            ListenIn.Logger.Instance.Log("Pinball gameobject not found", LoggerMessageType.Error);
             //Debug.LogError("Pinball state not found");
         }
 
@@ -166,7 +166,7 @@ public class StatePinball : State
         {
             //Getting level from resources
             string currLevel = String.Concat("LevelPrefabs/",MadLevel.currentLevelName);
-            Debug.Log(String.Format("StatePinball: loading {0}", currLevel));
+            ListenIn.Logger.Instance.Log(String.Format("StatePinball: loading {0}", currLevel), LoggerMessageType.Info);
             GameObject loadLevel = GameObject.Instantiate(Resources.Load(currLevel, typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
             loadLevel.transform.SetParent(go.transform, true);
             loadLevel.transform.SetAsFirstSibling();
@@ -182,7 +182,9 @@ public class StatePinball : State
             //Should never be zero since tutorialis being removed
             if (ID == 0)
             {
-                Debug.LogError("StatetPinball: ID zero as tutorial level is deprecated. Should not be accessed.");
+                ListenIn.Logger.Instance.Log("ID zero as tutorial level is deprecated", LoggerMessageType.Error);
+                //Debug.LogError("ID zero as tutorial level is deprecated");
+                //SetBucketPositions();
             }
             else
             {
@@ -197,7 +199,7 @@ public class StatePinball : State
 
         lvlManager.currDifficulty = this.currDifficulty;
 
-        //UploadManager.Instance.SetTimerState(TimerType.Pinball, true);
+        DatabaseXML.Instance.SetTimerState(DatabaseXML.TimerType.Pinball, true);
 
     }
 	
@@ -220,45 +222,51 @@ public class StatePinball : State
 
         Debug.Log("StatePinball: ExitLevelPinball() adding game_time_insert query");
 
-        //Dictionary<string, string> time_insert = new Dictionary<string, string>();
-        //time_insert.Add("patientid", UploadManager.Instance.PatientId.ToString());
-        //time_insert.Add("date", System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-        //time_insert.Add("totaltime", dGameTimeMin.ToString());
+        Dictionary<string, string> time_insert = new Dictionary<string, string>();
+        time_insert.Add("patientid", DatabaseXML.Instance.PatientId.ToString());
+        time_insert.Add("date", System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        time_insert.Add("totaltime", dGameTimeMin.ToString());
 
+        DatabaseXML.Instance.WriteDatabaseXML(time_insert, DatabaseXML.Instance.game_time_insert);
+
+        //Andrea: 30/10 move it for later
+
+        //if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork)
+        //{
+        //    //read the xml
+        //    DatabaseXML.Instance.ReadDatabaseXML();
+        //}
     }
 
-	public void InitLevelPinball(bool cheatOn)
+	public void InitLevelPinball()
 	{
         //Debug.Log("");
-        UploadManager.Instance.ResetTimer(TimerType.Idle);
+        DatabaseXML.Instance.ResetTimer(DatabaseXML.TimerType.Idle);
         m_PinballMono.UIHolder.SetActive(true);
         //m_PinballMono.FireButton.SetActive(true);
         m_PinballMono.Frame.SetActive(true);
         m_PinballMono.BucketsHolder.SetActive(true);
         m_PinballMono.SetSpwanerTriggerState(true);
         m_PinballMono.SetCannonState(true);
-        if (cheatOn)
-            m_PinballMono.EnableCannonGraphics();
 
         rotatingCogs[] cogs = m_PinballMono.Cannon.GetComponentsInChildren<rotatingCogs>();
-        if (cogs.Length != 0)
+        for (int i = 0; i < cogs.Length; i++)
         {
-            for (int i = 0; i < cogs.Length; i++)
-            {
-                cogs[i].enabled = true;
-            }
-        }        
+            cogs[i].enabled = true;
+        }
 
         ILevel lvlManager = m_PinballMono.transform.GetChild(0).gameObject.GetComponent<ILevel>();
+        //ILevel lvlManager = m_PinballMono.Levels[ID].GetComponent<ILevel>();
 
         if (lvlManager != null)
 		{
 			lvlManager.startingLevel = true;
-            Debug.Log(String.Format("StatePinball: InitLevelPinball() initializing {0} pinball level",lvlManager.name));
+            ListenIn.Logger.Instance.Log(String.Format("StatePinball: InitLevelPinball() initializing {0} pinball level",lvlManager.name), LoggerMessageType.Info);
         }
 		else
 		{
-            Debug.LogError("WARNING: StatePinball: InitLevelPinball() missing level manager.");
+            ListenIn.Logger.Instance.Log("StatePinball: InitLevelPinball() missing level manager", LoggerMessageType.Warning);
+            //Debug.LogWarning("Missing level manager");
 		}
 		startGame = endGame = DateTime.UtcNow;
 	}
@@ -271,7 +279,7 @@ public class StatePinball : State
 
     public override void Exit()
     {
-        Debug.Log("StatePinball: Exit() exiting pinball level");
+        ListenIn.Logger.Instance.Log("StatePinball: Exit() exiting pinball level", LoggerMessageType.Info);
         //Debug.Log("Exiting Pinball state"); 
 
 		//preparing the scene by removing elements that will create problems.
@@ -280,6 +288,11 @@ public class StatePinball : State
 		m_PinballMono.DuplicateEarnedJigsaw();
 		m_PinballMono.DisableOriginals();
         m_PinballMono.SetToAlphaFading(1.0f, true, false);
+        //m_PinballMono.SetFade();
+
+        //UnityEngine.Object.Destroy(m_PinballMono.gameObject);
+        //ListenIn.Logger.Instance.Log(String.Format("Mono : [ {0} ]; Name : [ {1} ]" ,m_PinballMono, m_PinballMono.name), LoggerMessageType.Info);
+        //Debug.Log("Mono : [" + m_PinballMono + "]; Name : [" + m_PinballMono.name + "];");
 		
 		StateChallenge.Instance.ResetCoins();
         StateChallenge.Instance.ResetCorrectAnswers();
@@ -290,5 +303,6 @@ public class StatePinball : State
             thisChapter.CurrPlayedTime += endGame - startGame;
         }
 
+        //Debug.Log(thisChapter.CurrPlayedTime.ToString());
 	}
 }
