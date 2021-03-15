@@ -19,7 +19,7 @@ public class LevelTutorialManager : ILevel {
 	{
 		base.InitLevel();
 
-		pointintHand = gameObject.transform.FindChild("PointingHand").gameObject;
+		pointintHand = gameObject.transform.Find("PointingHand").gameObject;
 		if(pointintHand == null) Debug.LogError("Pointing Hand not found");
 
 		lerp = pointintHand.GetComponent<TransformLerper>();

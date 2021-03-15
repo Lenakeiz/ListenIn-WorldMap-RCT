@@ -59,6 +59,8 @@ TagManager:
   - Cover
   - JigsawPuzzle
   - DebugUI
+  - QSlider
+  - QInput
   layers:
   - Default
   - TransparentFX
@@ -86,9 +88,9 @@ TagManager:
   - NoBorderCollision
   - CarsToLeft
   - CarsToRight
-  - 
-  - 
-  - 
+  - Avatar
+  - Background
+  - Stimulus
   - 
   - 
   - 
@@ -116,4 +118,10 @@ TagManager:
     locked: 0
   - name: WorldSelection
     uniqueID: 2475191863
+    locked: 0
+  - name: Background
+    uniqueID: 3251571823
+    locked: 0
+  - name: Avatar
+    uniqueID: 2706268659
     locked: 0

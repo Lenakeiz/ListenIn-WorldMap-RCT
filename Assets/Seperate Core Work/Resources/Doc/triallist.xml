@@ -1,0 +1,644 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  
+  <node idx="0">
+  	<stimulus idx="0">
+  		<name>talk</name>
+  		<image>(45)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>sing</name>
+  		<image>(29)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>type</name>
+  		<image>(48)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<stimulus idx="3">
+  		<name>throw</name>
+  		<image>(1)</image>
+  		<type>unrelated</type>
+  	</stimulus>  	
+  	<targetAudio>F2_talk</targetAudio> 	
+  	<targetIdx>0</targetIdx>     
+  </node>
+    
+  <node idx="1">
+  	<stimulus idx="0">
+  		<name>money</name>
+  		<image>(39)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>credit card</name>
+  		<image>(15)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>menu</name>
+  		<image>(38)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>coffee</name>
+  		<image>(14)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F2_money</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="2">
+  	<stimulus idx="0">
+  		<name>beginning</name>
+  		<image>(59)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>end</name>
+  		<image>(21)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>begging</name>
+  		<image>(58)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>question</name>
+  		<image>(42)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F2_beginning</targetAudio>	
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="3">
+  	<stimulus idx="0">
+  		<name>The bear jumps</name>
+  		<image>(56)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The dog jumps</name>
+  		<image>(17)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The boy jumps</name>
+  		<image>(70)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>The man jumps</name>
+  		<image>(36)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F2_the_bear_jumps</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>   
+    
+  <node idx="4">
+  	<stimulus idx="0">
+  		<name>boy</name>
+  		<image>(64)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>man</name>
+  		<image>(37)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>bee</name>
+  		<image>(57)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<stimulus idx="3">
+  		<name>ring</name>
+  		<image>(44)</image>
+  		<type>unrelated</type>
+  	</stimulus>
+  	<stimulus idx="4">
+  		<name>girl</name>
+  		<image>(32)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="5">
+  		<name>bin</name>
+  		<image>(20)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<targetAudio>F1_boy</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>
+  
+  <node idx="5">
+  	<stimulus idx="0">
+  		<name>back</name>
+  		<image>(55)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>front</name>
+  		<image>(23)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>book</name>
+  		<image>(60)</image>
+  		<type>phonological</type>
+  	</stimulus>  	
+  	<stimulus idx="3">
+  		<name>hand</name>
+  		<image>(48)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="4">
+  		<name>box</name>
+  		<image>(61)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<targetAudio>M1_back</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>
+  
+  <node idx="6">
+  	<stimulus idx="0">
+  		<name>The boy chases the bird</name>
+  		<image>(63)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The boy chases the dog</name>
+  		<image>(65)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The boy chases the ball</name>
+  		<image>(62)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>The boy chases the bubbles</name>
+  		<image>(64)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>M1_the_boy_chases_the_bird</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>   
+  
+  <node idx="7">
+  	<stimulus idx="0">
+  		<name>question</name>
+  		<image>(42)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>think</name>
+  		<image>(37)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>quiet</name>
+  		<image>(43)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>money</name>
+  		<image>(39)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F1_question</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="8">
+  	<stimulus idx="0">
+  		<name>The cat is climbing the tree</name>
+  		<image>(6)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The cat was climbing the tree</name>
+  		<image>(7)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The cat will be climbing the tree</name>
+  		<image>(8)</image>
+  		<type>phonological</type>
+  	</stimulus>   		
+  	<targetAudio>F1_the_cat_is_climbing_the_tree</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="9">
+  	<stimulus idx="0">
+  		<name>furniture</name>
+  		<image>(75)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>telephone</name>
+  		<image>(46)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>fireplace</name>
+  		<image>(22)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>dinosaur</name>
+  		<image>(41)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>M1_furniture</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>   
+  
+  <node idx="10">
+  	<stimulus idx="0">
+  		<name>The girl shouts</name>
+  		<image>(28)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The girl shoots</name>
+  		<image>(27)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The girl laughs</name>
+  		<image>(32)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>The girl cries</name>
+  		<image>(24)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>M1_the_girl_shouts</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="11">
+  	<stimulus idx="0">
+  		<name>buses</name>
+  		<image>(5)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>bus</name>
+  		<image>(4)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>boxes</name>
+  		<image>(61)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>coffee</name>
+  		<image>(14)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F1_buses</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="12">
+  	<stimulus idx="0">
+  		<name>children</name>
+  		<image>(10)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>child</name>
+  		<image>(32)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>chicken</name>
+  		<image>(9)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>insect</name>
+  		<image>(3)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>M1_children</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="13">
+  	<stimulus idx="0">
+  		<name>The boy will be swimming</name>
+  		<image>(2)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The boy was swimming</name>
+  		<image>(69)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The boy is swimming</name>
+  		<image>(74)</image>
+  		<type>phonological</type>
+  	</stimulus>   		
+  	<targetAudio>M1_the_boy_will_be_swimming</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="14">
+  	<stimulus idx="0">
+  		<name>The woman reads the boy a book</name>
+  		<image>(52)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>woman, boy, book 1</name>
+  		<image>(49)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>woman, boy, book 2</name>
+  		<image>(50)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>woman, boy, book 3</name>
+  		<image>(53)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F1_the_woman_reads_the_boy_a_book</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>  
+  
+  <node idx="15">
+  	<stimulus idx="0">
+  		<name>She runs</name>
+  		<image>(26)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>He runs</name>
+  		<image>(70)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>They run</name>
+  		<image>(59)</image>
+  		<type>phonological</type>
+  	</stimulus>   		
+  	<targetAudio>F1_she_runs</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="16">
+  	<stimulus idx="0">
+  		<name>The girl feeds the goat</name>
+  		<image>(25)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The boy feeds the goat</name>
+  		<image>(67)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The woman feeds the goat</name>
+  		<image>(51)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>The man feeds the goat</name>
+  		<image>(35)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F1_the_girl_feeds_the_goat</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="17">
+  	<stimulus idx="0">
+  		<name>The boy pulls the goat</name>
+  		<image>(73)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The boy holds the goat</name>
+  		<image>(68)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The boy feeds the goat</name>
+  		<image>(67)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<stimulus idx="3">
+  		<name>The boy chases the goat</name>
+  		<image>(66)</image>
+  		<type>unrelated</type>
+  	</stimulus>
+  	<stimulus idx="4">
+  		<name>The boy herds the goat</name>
+  		<image>(33)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="5">
+  		<name>The goat licks the boy</name>
+  		<image>(71)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<targetAudio>F2_the_boy_pulls_the_goat</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>   
+  
+  <node idx="18">
+  	<stimulus idx="0">
+  		<name>think</name>
+  		<image>(37)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>pray</name>
+  		<image>(72)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>throw</name>
+  		<image>(1)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>cry</name>
+  		<image>(24)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F1_think</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="19">
+  	<stimulus idx="0">
+  		<name>Inside</name>
+  		<image>(75)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>Outside</name>
+  		<image>(36)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>Insect</name>
+  		<image>(3)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>coffee</name>
+  		<image>(14)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>M1_inside</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="20">
+  	<stimulus idx="0">
+  		<name>old</name>
+  		<image>(41)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>new</name>
+  		<image>(40)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>gold</name>
+  		<image>(30)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>bear</name>
+  		<image>(56)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>M1_old</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="21">
+  	<stimulus idx="0">
+  		<name>The happy girl</name>
+  		<image>(32)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The sad girl</name>
+  		<image>(24)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The hippy girl</name>
+  		<image>(34)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>The shouting girl</name>
+  		<image>(28)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F2_the_happy_girl</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="22">
+  	<stimulus idx="0">
+  		<name>The chipmunk eats the nuts</name>
+  		<image>(11)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The chipmunk ate the nuts</name>
+  		<image>(12)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The chipmunk will eat the nuts</name>
+  		<image>(13)</image>
+  		<type>phonological</type>
+  	</stimulus>   		
+  	<targetAudio>F2_the_chipmunk_eats_the_nuts</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="23">
+  	<stimulus idx="0">
+  		<name>The dog is under the bed</name>
+  		<image>(19)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The dog is on the bed</name>
+  		<image>(18)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The dog is in the bed</name>
+  		<image>(16)</image>
+  		<type>phonological</type>
+  	</stimulus>   		
+  	<targetAudio>F2_the_dog_is_under_the_bed</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="24">
+  	<stimulus idx="0">
+  		<name>The woman ran</name>
+  		<image>(31)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The woman runs</name>
+  		<image>(26)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The woman will run</name>
+  		<image>(54)</image>
+  		<type>phonological</type>
+  	</stimulus>   		
+  	<targetAudio>F1_the_woman_ran</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="25">
+  	<stimulus idx="0">
+  		<name>Their goat</name>
+  		<image>(47)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>His goat</name>
+  		<image>(68)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>Her goat</name>
+  		<image>(51)</image>
+  		<type>phonological</type>
+  	</stimulus>   		
+  	<targetAudio>M1_their_goat</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+    
+</root>

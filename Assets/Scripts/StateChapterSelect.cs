@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿//#define CHECK_STATECHAPTERSELECT_USENESS
+
+using UnityEngine;
 using System;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
-
 
 public class Chapter
 {
@@ -67,9 +68,10 @@ public class Chapter
 
     public bool AllPiecesUnlocked()
     {
+        //OH MY GOD
         for (int i = 0; i < JigsawPeicesUnlocked.Length; i++)
         {
-            if (JigsawPeicesUnlocked[i] != 1)
+            if (!Mathf.Approximately(JigsawPeicesUnlocked[i],1.0f))
             {
                 return false;
             }
@@ -91,8 +93,10 @@ public class Chapter
 	}
 }
 
+
 public class StateChapterSelect : State
 {
+
     #region singleton
     private static readonly StateChapterSelect instance = new StateChapterSelect();
     public static StateChapterSelect Instance
@@ -103,7 +107,7 @@ public class StateChapterSelect : State
         }
     }
     #endregion
-
+#if CHECK_STATECHAPTERSELECT_USENESS
     private Chapter[] m_Chapters = new Chapter[]{
 		new Chapter("*Tutorial*", 0,"Background_004_deprecated", "Background_009", new Color(1f, 1f, 1f),true, ""),
 
@@ -250,13 +254,14 @@ public class StateChapterSelect : State
 
 	}
 
+#endif
 	// Use this for initialization
 	public override void Init () {
-
-		if(!m_Init)
+#if CHECK_STATECHAPTERSELECT_USENESS
+        if(!m_Init)
 		{
 			try {
-				GameStateSaver.Instance.Load();
+				GameStateSaver.Instance.LoadGameProgress();
 			} catch (System.Exception ex) {
 
 				Debug.LogError(ex.Message);
@@ -297,11 +302,11 @@ public class StateChapterSelect : State
 			activateJigsawAnimation = true;
 			m_Chapters[m_LastChecked].Mono.PlayButton.SetActive(false);
 		}
-
+#endif
 	}
-
-	//TODO not used anymore
-	public void CheckScrollRight()
+#if CHECK_STATECHAPTERSELECT_USENESS
+    //TODO not used anymore
+    public void CheckScrollRight()
 	{
 		//Trying to scroll to right automatically
 		bool scroll = true;
@@ -425,11 +430,13 @@ public class StateChapterSelect : State
 		}
 
 	}
-
+#endif
 	// Update is called once per frame
     public override void Update()
     {
-		if(activateJigsawAnimation)
+#if CHECK_STATECHAPTERSELECT_USENESS
+
+        if (activateJigsawAnimation)
 		{
 			activateJigsawAnimation = false;
 			animating = true;
@@ -481,16 +488,16 @@ public class StateChapterSelect : State
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			GameStateSaver.Instance.Save();
+			GameStateSaver.Instance.SaveGameProgress();
 		}
 		else if (Input.GetKeyDown(KeyCode.L))
 		{
-			GameStateSaver.Instance.Load();
+			GameStateSaver.Instance.LoadGameProgress();
 		}
 			
-
+#endif
     }
-
+#if CHECK_STATECHAPTERSELECT_USENESS
     private float getGridPosAt(int i ){
         float width = m_Mono.Grid.cellSize.x;
         float pos = ((float)width * i) - ((float)width * ((float)(m_Mono.Grid.transform.childCount - 1) * 0.5f));
@@ -557,13 +564,15 @@ public class StateChapterSelect : State
     {
         m_Dragging = false;
     }
-
+#endif
     public override void Exit()
     {
+#if CHECK_STATECHAPTERSELECT_USENESS
         //UnityEngine.Object.Destroy(m_Mono.gameObject);
-		stateChapterSelectPrefab.SetActive(false);
+        stateChapterSelectPrefab.SetActive(false);
+#endif
     }
-
+#if CHECK_STATECHAPTERSELECT_USENESS
     public void PressButton(int ID)
     {
 		if(animating)
@@ -590,4 +599,5 @@ public class StateChapterSelect : State
 			}
 		}
 	}
+#endif
 }

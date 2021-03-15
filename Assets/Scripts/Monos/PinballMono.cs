@@ -183,6 +183,19 @@ public class PinballMono : MonoBehaviour {
 		}
 	}
 
+    public void EnterCannon()
+    {
+        //iTween.MoveTo();
+        //StartCoroutine(WaitForPinballEntering());
+        CoinSpawnerB2_Final spawner = m_Cannon.GetComponent<CoinSpawnerB2_Final>();
+        spawner.AnimateEnterCannon();
+    }
+
+    private IEnumerator WaitForPinballEntering()
+    {
+        yield return new WaitForSeconds(4);
+    }
+
     public void SetEarnedCoins()
     {
         gameObject.GetComponentInChildren<CoinSpawnerB2_Final>().SetCoinsEarned();
@@ -190,7 +203,7 @@ public class PinballMono : MonoBehaviour {
 
     public void SetSpwanerTriggerState(bool state)
     {
-        Collider2D spawnerCollider = m_Cannon.GetComponent<PolygonCollider2D>();
+        Collider2D spawnerCollider = m_Cannon.GetComponent<Collider2D>();
         spawnerCollider.enabled = state;
         Collider2D upperBarCollider = m_frame.GetComponent<Collider2D>();
         upperBarCollider.enabled = state;
@@ -220,9 +233,14 @@ public class PinballMono : MonoBehaviour {
 	public void SetCannonState(bool state)
 	{
 		gameObject.GetComponentInChildren<CoinSpawnerB2_Final>().ActivateCannon = state;
-	}
+    }
 
-	public void OrderCoinInSpawner()
+    public void EnableCannonGraphics()
+    {
+        gameObject.GetComponentInChildren<CoinSpawnerB2_Final>().SetCannonSprite();
+    }
+
+    public void OrderCoinInSpawner()
 	{
 		gameObject.GetComponentInChildren<CoinSpawnerB2_Final>().SetListOfCoins();
 	}
@@ -273,7 +291,7 @@ public class PinballMono : MonoBehaviour {
 		
 	}
 
-    public void UnlockAndFinishPinballGame()
+    public void UnlockAndFinishPinballGame(bool unlockAll)
     {
         CardBucketController[] cbc = GameObject.FindObjectsOfType<CardBucketController>();
         if (cbc != null && cbc.Length != 0)
@@ -281,6 +299,8 @@ public class PinballMono : MonoBehaviour {
             for (int i = 0; i < cbc.Length; i++)
             {
                 cbc[i].UnlockJigsawPiece();
+                if (!unlockAll)
+                    break;
             }
         }
 
@@ -298,7 +318,7 @@ public class PinballMono : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
-                UnlockAndFinishPinballGame();
+                UnlockAndFinishPinballGame(true);
             }
         }
 
@@ -307,20 +327,15 @@ public class PinballMono : MonoBehaviour {
 			startFading = false;
 			StartCoroutine("FadePlane");
 		}
-		//else if(startAnimationIn)
-		//{
-		//	startAnimationIn = false;
-		//	StartCoroutine("FadePinballIn");
-		//}
-		//else if(startLoadingCannon)
-		//{
-		//	startLoadingCannon = false;
-		//	StartCoroutine("LoadCannon");
-		//}
 		else if(changeState)
 		{
 			changeState = false;
             GameController.Instance.ChangeState(GameController.States.StatePinball);
         }
+	}
+
+	public void SkipPinball()
+	{
+		GameController.Instance.ChangeState(GameController.States.StateReward);
 	}
 }

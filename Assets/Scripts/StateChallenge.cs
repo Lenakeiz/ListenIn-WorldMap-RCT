@@ -39,7 +39,7 @@ public class StateChallenge : State
         
 		m_GO = go;
 		challengeanim = go.GetComponent<ChallengeAnimator>();
-        Debug.Log("Init therapy");
+        Debug.Log("StateChallenge: Init therapy");
 
 		challengeanim.currMargin = 0;
 		challengeanim.margins[challengeanim.currMargin].SetActive(true);
@@ -48,7 +48,6 @@ public class StateChallenge : State
         questions = 0;
         correctAnswers = 0;
 
-        DatabaseXML.Instance.SetTimerState(DatabaseXML.TimerType.Therapy, true);
     }
 
     // Update is called once per frame
@@ -56,20 +55,21 @@ public class StateChallenge : State
     {
         //Debug.Log("Coins : [" + coins + "];");
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            AddCoin(80);
-			cheatActivated = true;
-            StatePinball.Instance.initialize = false;
-            GameController.Instance.ChangeState(GameController.States.StatePinball);
-            StatePinball.Instance.InitLevelPinball();
-        }
+        //AndreaLIRO: putting this on the GameControlScriptStandard to control normal process of closing the challenge therapy
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    AddCoin(10);
+        //    cheatActivated = true;
+        //    StatePinball.Instance.initialize = false;
+        //    GameController.Instance.ChangeState(GameController.States.StatePinball);
+        //    StatePinball.Instance.InitLevelPinball();
+        //}
 #endif
     }
 
     public override void Exit()
     {
-        Debug.Log("Exiting Challege");
+        Debug.Log("StateChallenge: exiting challenge");
 		if(cheatActivated)
 		{
 			UnityEngine.GameObject.Destroy(m_GO);
@@ -78,7 +78,6 @@ public class StateChallenge : State
         StatePinball.Instance.initialize = false;
 		cheatActivated = false;
 
-        DatabaseXML.Instance.SetTimerState(DatabaseXML.TimerType.Therapy, false);
     }
 
     private int coins ;
@@ -133,13 +132,13 @@ public class StateChallenge : State
 
 	public void UnlockChallenged()
 	{
-		m_GO.GetComponentInChildren<GameControlScript>().PlayAudio();
+		m_GO.GetComponentInChildren<GameControlScriptStandard>().PlayAudioLIRO();
 	}
 
     
     public void SetTotalTherapyTime(double time)
     {
-        Debug.Log("SetTherapyTimeMin = " + time);
+        Debug.Log("StateChallenge: SetTherapyTimeMin = " + time);
         //therapyTime = TimeSpan.FromMinutes(time);
         totalTherapyTime = time;
     }
@@ -174,4 +173,4 @@ public class StateChallenge : State
         return time;
     }
 
-    }
+}

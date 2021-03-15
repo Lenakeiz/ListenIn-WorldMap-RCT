@@ -49,7 +49,7 @@ public class SoundManager : MonoBehaviour {
 	public AudioMixerGroup[] audioMixerGroups;
 
 	public List<CustomSound> sounds;
-	private List<GameObject> playingList;
+    private List<GameObject> playingList;
 
 	private Dictionary<string,ChannelInfo> channelInfos;
 	private Dictionary<string,AudioClip> playedSounds;

@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour {
                     go.GetComponent<CircleCollider2D>().enabled = false;
                 }
 
-                gameController.GetComponent<GameControlScript>().SetEnable(false);
+                gameController.GetComponent<GameControlScriptStandard>().SetEnable(false);
 
                 ui_element.GetComponent<ShowPanels>().ShowInitialMenu(true);
                 //gameController.GetComponent<GameControlScript>().SetLevelMenu(true);

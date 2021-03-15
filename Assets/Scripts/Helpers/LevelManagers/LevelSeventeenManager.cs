@@ -12,6 +12,9 @@ public class LevelSeventeenManager : ILevel
     private bool init = true;
     float spawnTimer = 0.0f;
 
+    public SurfaceEffector2D carsToTheLeft;
+    public SurfaceEffector2D carsToTheRight;
+
     public void ReturnToPool(int index)
     {
         if (index < pool.Count)
@@ -58,6 +61,7 @@ public class LevelSeventeenManager : ILevel
 
     protected override void Start()
     {
+        base.Start();
         init = true;
         GameObject[] cars = GameObject.FindGameObjectsWithTag("BouncerPeg");
         for (int i = 0; i < cars.Length; i++)
@@ -73,7 +77,6 @@ public class LevelSeventeenManager : ILevel
     public override void UpdateLevel()
     {
 
-        //Cloud managing
         spawnTimer += Time.deltaTime;
         if (spawnTimer > currSpawnTime && !init)
         {
@@ -84,4 +87,28 @@ public class LevelSeventeenManager : ILevel
             }
         }
     }
+
+    #region Difficulty setting
+    protected override void PrepareEasyLevel()
+    {
+        maxSpawnTime = 2.0f;
+        minSpawnTime = 0.8f;
+        carsToTheLeft.speed = -8f;
+        carsToTheRight.speed = 6f;
+    }
+    protected override void PrepareMediumLevel()
+    {
+        maxSpawnTime = 1.5f;
+        minSpawnTime = 0.5f;
+        carsToTheLeft.speed = -10f;
+        carsToTheRight.speed = 8f;
+    }
+    protected override void PrepareHardLevel()
+    {
+        maxSpawnTime = 0.6f;
+        minSpawnTime = 0.25f;
+        carsToTheLeft.speed = -9f;
+        carsToTheRight.speed = 6f;
+    }
+    #endregion Difficulty setting
 }

@@ -122,21 +122,13 @@ public class StateReward : State
 			jigCanvas.GetComponentInChildren<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
 			jigCanvas.GetComponentInChildren<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 
-//			GameObject lerp = new GameObject("Lerper");
-//			TransformLerper tr = lerp.AddComponent<TransformLerper>();
-//			tr.Init();
-//			tr.usingRectTransform = true;
-//			tr.singleStepDuration = 1.0f;
-//			tr.ObjectToLerp = jigCanvas.GetComponentInChildren<Canvas>().gameObject.transform.GetChild(0).gameObject;
-
 			RectTransform jig = jigCanvas.GetComponentInChildren<Canvas>().gameObject.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
 
 			jigCanvas.transform.position = Vector3.zero;
 			jigCanvas.transform.localScale = Vector3.one;
-			jig.localPosition = new Vector3(340,200);//327,189//Camera.main.WorldToScreenPoint(new Vector3(7,4.5f,0));//new Vector3(384, 233 - i * 12);
+			jig.localPosition = new Vector3(340,200);
 			jig.localScale = new Vector3(0.7f,0.7f);
 
-			//jigsawLerpers.Add(lerp);
 		}
 
 		fadeChapterSelect = true;
@@ -154,13 +146,8 @@ public class StateReward : State
 	private void CleanUpScene()
 	{
 		float durationTime = 0.5f;
-//		if(m_jigsaw_earned.transform.childCount != 0)
-//		{
-//			durationTime = 1.0f;
-//		}
 		UnityEngine.Object.Destroy(m_splines, durationTime);
 		CleanUpJigsawLerpers();
-		//UnityEngine.Object.Destroy(m_jigsaw_earned, durationTime);
 	}
 
     // Update is called once per frame
@@ -175,14 +162,12 @@ public class StateReward : State
 		{
 			jigsawDisappear = false;
 			SetEarnedJigsawToCanvas();
-			//SetEarnedJigsawDisappear();
 		}
 		else if(jigsawAppear && CheckLerperAnimationEnded())
 		{
 			jigsawAppear = false;
-			//SetEarnedJigsawToCanvas();
 		}
-		else if(fadeChapterSelect)// && m_splines == null )//&& m_jigsaw_earned == null)
+		else if(fadeChapterSelect)
 		{
 			fadeChapterSelect = false;
             CloseRewardTransition();
@@ -202,7 +187,6 @@ public class StateReward : State
 		{
 			UnityEngine.Object.Destroy(m_jigsaw_earned);
 		}
-
-        DatabaseXML.Instance.SetTimerState(DatabaseXML.TimerType.Pinball, false);
+        //UploadManager.Instance.SetTimerState(TimerType.Pinball, false);
     }
 }

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class LevelFifteenManager : ILevel {
 
-	//Wind managing
-	private EllipsoidParticleEmitter emitter;
 	private GameObject monk;
 
 	private float windTimer = 0.0f;
@@ -47,7 +45,6 @@ public class LevelFifteenManager : ILevel {
 
 		windTimer = 0.0f;
 		spawnTimer = 0.0f;
-		emitter.emit = true;
 		windstate = WindState.WAITING;
 		_spawnClouds = true;
 	}
@@ -56,7 +53,6 @@ public class LevelFifteenManager : ILevel {
 	{
 		base.EndLevel();
 		_spawnClouds = false;
-		emitter.emit = false;
 	}
 
 	protected override void Start()
@@ -74,9 +70,7 @@ public class LevelFifteenManager : ILevel {
         base.Start();
 
 		currSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);
-		emitter = GetComponentInChildren<EllipsoidParticleEmitter>();
-		ResetWind();
-		monk = gameObject.transform.FindChild("Monk").gameObject;
+		monk = gameObject.transform.Find("Monk").gameObject;
 
 		windstate = WindState.IDLE;
 
@@ -111,18 +105,6 @@ public class LevelFifteenManager : ILevel {
 		return false;
 	}
 
-	void ResetWind()
-	{
-		emitter.worldVelocity = new Vector3(0,-1,0);
-	}
-
-	void ActivateWind()
-	{
-		windForceDirection = Random.Range(0,101) > 49 ? 1 : -1;
-		emitter.worldVelocity = new Vector3(windForceDirection * 4,-1,0);
-		currWindStrength = Random.Range(xWindMin,xWindMax);
-	}
-
 	// Update is called once per frame
 	public override void UpdateLevel() {
 
@@ -135,7 +117,6 @@ public class LevelFifteenManager : ILevel {
 			if(windTimer > minWindWaitTime)
 			{
 				windstate = WindState.ACTIVE;
-				ActivateWind();
 				windTimer = 0;
 			}
 			break;
@@ -145,7 +126,6 @@ public class LevelFifteenManager : ILevel {
 			if(windTimer > maxWindTime)
 			{
 				windstate = WindState.WAITING;
-				ResetWind();
 				windTimer = 0;
 			}
 			break;
@@ -207,7 +187,7 @@ public class LevelFifteenManager : ILevel {
             if (coinDestroyer != null)
             {
                 coinDestroyer.enabled = true;
-                obj.transform.FindChild("Death").gameObject.SetActive(true);
+                obj.transform.Find("Death").gameObject.SetActive(true);
             }
         }
 

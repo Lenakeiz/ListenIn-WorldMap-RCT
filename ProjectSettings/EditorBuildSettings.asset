@@ -6,12 +6,45 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SetupScreen_Debug.unity
+    guid: 494c12c371a599b40845e9987e648ba2
+  - enabled: 1
+    path: Assets/Scenes/GameIntroNew.unity
+    guid: b4404fa7a77726a49bde8285f8998603
+  - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: 19374a8a74b27fd499767e711d6c4b7e
+  - enabled: 1
     path: Assets/Scenes/SetupScreen.unity
+    guid: 9fed064c7334a25459ed8d3c61c8c9d1
   - enabled: 1
     path: Assets/Scenes/LevelSelectScene.unity
+    guid: 4a2124bcbd035094782266239c77f519
   - enabled: 1
     path: Assets/Scenes/GameLoop.unity
+    guid: 4993528601a162947b242ae9ec0d1e85
   - enabled: 1
     path: Assets/Scenes/Demo.unity
+    guid: 8db450a07db8c2543b97cd178e93144e
   - enabled: 1
     path: Assets/Scenes/GameIntro.unity
+    guid: 9303709675487fb42ae48a04acd092f1
+  - enabled: 1
+    path: Assets/Scenes/BasketSelection.unity
+    guid: 62bb921cbb1a7824fa1d3e77baf1aa34
+  - enabled: 1
+    path: Assets/Scenes/ACT.unity
+    guid: 5d4d0cd2dfd2ef2408a7895db15a020b
+  - enabled: 1
+    path: Assets/Scenes/MainHUB.unity
+    guid: a7432188e9048c14688c4d6fbbacb1f6
+  - enabled: 1
+    path: Assets/SART/SART.unity
+    guid: e9297c4b0e70c3a4d8cb7f795b75c11f
+  - enabled: 1
+    path: Assets/SART/SART_Practice.unity
+    guid: 7ab76775c73b58741b4bbdcbfc5e6d30
+  - enabled: 1
+    path: Assets/Scenes/FunctionalQuestionnaire.unity
+    guid: 0882e447fb643324abbb106049d3c2f3
+  m_configObjects: {}

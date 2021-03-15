@@ -46,13 +46,13 @@ public class JapaneseGirlController : MonoBehaviour {
 		grabbedCoins = new List<GameObject>();
 		hands = new List<Transform>();
 
-		Transform childleft = transform.FindChild("Left");
+		Transform childleft = transform.Find("Left");
 		if(childleft != null)
 		{
 			hands.Add(childleft);
 		}
 
-		Transform childright = transform.FindChild("Right");		
+		Transform childright = transform.Find("Right");		
 		if(childright != null)
 		{
 			hands.Add(childright);

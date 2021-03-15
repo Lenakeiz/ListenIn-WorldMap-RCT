@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  
+  <node idx="0">
+  	<stimulus idx="0">
+  		<name>talk</name>
+  		<image>(45)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>sing</name>
+  		<image>(29)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>type</name>
+  		<image>(48)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<stimulus idx="3">
+  		<name>throw</name>
+  		<image>(1)</image>
+  		<type>unrelated</type>
+  	</stimulus>  	
+  	<targetAudio>F2_talk</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>
+    
+  <node idx="1">
+  	<stimulus idx="0">
+  		<name>money</name>
+  		<image>(39)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>credit card</name>
+  		<image>(15)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>menu</name>
+  		<image>(38)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>coffee</name>
+  		<image>(14)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F2_money</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="2">
+  	<stimulus idx="0">
+  		<name>beginning</name>
+  		<image>(59)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>end</name>
+  		<image>(21)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>begging</name>
+  		<image>(58)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>question</name>
+  		<image>(42)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F2_beginning</targetAudio>	
+  	<targetIdx>0</targetIdx>     
+  </node> 
+  
+  <node idx="3">
+  	<stimulus idx="0">
+  		<name>The bear jumps</name>
+  		<image>(56)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>The dog jumps</name>
+  		<image>(17)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>The boy jumps</name>
+  		<image>(70)</image>
+  		<type>phonological</type>
+  	</stimulus> 
+  	<stimulus idx="3">
+  		<name>The man jumps</name>
+  		<image>(36)</image>
+  		<type>unrelated</type>
+  	</stimulus> 	
+  	<targetAudio>F2_the_bear_jumps</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>   
+    
+  <node idx="4">
+  	<stimulus idx="0">
+  		<name>boy</name>
+  		<image>(64)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>man</name>
+  		<image>(37)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>bee</name>
+  		<image>(57)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<stimulus idx="3">
+  		<name>ring</name>
+  		<image>(44)</image>
+  		<type>unrelated</type>
+  	</stimulus>
+  	<stimulus idx="4">
+  		<name>girl</name>
+  		<image>(32)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="5">
+  		<name>bin</name>
+  		<image>(20)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<targetAudio>F1_boy</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node>
+  
+  <node idx="5">
+  	<stimulus idx="0">
+  		<name>back</name>
+  		<image>(55)</image>
+  		<type>target</type>
+  	</stimulus>
+  	<stimulus idx="1">
+  		<name>front</name>
+  		<image>(23)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="2">
+  		<name>book</name>
+  		<image>(60)</image>
+  		<type>phonological</type>
+  	</stimulus>  	
+  	<stimulus idx="3">
+  		<name>hand</name>
+  		<image>(48)</image>
+  		<type>semantic</type>
+  	</stimulus>
+  	<stimulus idx="4">
+  		<name>box</name>
+  		<image>(61)</image>
+  		<type>phonological</type>
+  	</stimulus>
+  	<targetAudio>M1_back</targetAudio>
+  	<targetIdx>0</targetIdx>     
+  </node> 
+      
+</root>

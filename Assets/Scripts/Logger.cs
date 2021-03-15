@@ -8,9 +8,6 @@ using UnityEngine.UI;
 
 namespace ListenIn
 {
-    public enum LoggerMessageType { Info, Warning, Error };
-
-    struct MessageToLog { public string message; public LoggerMessageType messageType; public string logDate; }
 
     public class Logger : Singleton<Logger>
     {
@@ -90,31 +87,14 @@ namespace ListenIn
                 lock (LogBufferList)
                 {
                     LogBufferList.Add(mtl);
-                    //if (_lastLogTime.AddSeconds(60).Ticks > DateTime.UtcNow.Ticks)
-                    //    return;
-
-                    //string interpolated = String.Concat("LI-", DateTime.Today.ToString("yyyy-MM-dd"), "-", DateTime.Now.ToString("HH"), ".txt");
-                    //using
-                    //    (
-                    //        var log = File.AppendText(Path.Combine(_externalPath, interpolated))
-                    //    )
-                    //{
-                    //    foreach (var line in LogBufferList)
-                    //    {
-                    //        log.WriteLine(GetLoggerLine(line));
-                    //    }
-
-                    //    _lastLogTime = DateTime.UtcNow;
-                    //    log.Flush();
-                    //    LogBufferList.Clear();
-
-                    //}
-
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError(ex.Message);
+                //Debug.LogError(ex.Message);
+                //Detaching logger to prevent an infinite recursive call
+                Application.logMessageReceived -= HandleLog;
+                _isLoggerReady = false;
             }
 
 
@@ -152,10 +132,19 @@ namespace ListenIn
             }
             catch (Exception ex)
             {
-                Debug.LogError(ex.Message);
+                //This can cause infinite loop. Cannot do anything
+                //throw ex;
+                //Debug.LogError(ex.Message);
+                //Detaching logger to prevent an infinite recursive call
+                Application.logMessageReceived -= HandleLog;
+                _isLoggerReady = false;
             }
         }
 
+        /// <summary>
+        /// Writes on the screen (bottom left) the current message
+        /// </summary>
+        /// <param name="mtl"></param>
         private void WriteConsole(MessageToLog mtl)
         {
             if (_screenLogger != null)

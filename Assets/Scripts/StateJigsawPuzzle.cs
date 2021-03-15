@@ -37,7 +37,7 @@ public class StateJigsawPuzzle : State
     private float secToWait = 1.5f;
     private ParticleSystem endSystemEffect;
 
-    private int m_patientId = -1;
+    private string m_patientId = "-1";
 
     public Dictionary<string, Chapter> Chapters;
 
@@ -52,33 +52,38 @@ public class StateJigsawPuzzle : State
 
     // This initialization is when the game starts, for loading in memory the different levels
     private bool m_Init = false;
+
+    private bool achievementWasReached = false;
     #endregion
 
-
+    /// <summary>
+    /// This is a loca dictionary for the level names. It has been crerated before introducing the level manager
+    /// <para>It is being used by ILevel interface to load dynamically the backgrounds and to assign a particular color to each level in the jigsaw recap screen</para>
+    /// </summary>
     private void InitializeChapters(){
         Chapters = new Dictionary<string, Chapter>();
-        Chapters.Add("Space Travel", (new Chapter("Space", 2, "Background_002", "Postcards/Postcard_Space", Color.black, false, "")));
-        Chapters.Add("Cheeky Jungle", (new Chapter("Cheeky Jungle", 3, "Background_008", "Postcards/Postcard_CheekyJungle", Color.red, false, "")));
-        Chapters.Add("Candy Madness", (new Chapter("Candy Island", 1, "Background_009", "Postcards/Postcard_Candyland", new Color32(255, 0, 162, 255), false, "")));
-        Chapters.Add("Cookie Monster", (new Chapter("Cookie Monsters", 4, "Background_011", "Postcards/Postcard_CookieMonsters", new Color32(255, 221, 0, 255), false, "")));
-        Chapters.Add("Tricky Lights", (new Chapter("Tricky Lights", 5, "Background_014", "Postcards/Postcard_TrickyLights", Color.black, false, "")));
+        Chapters.Add("Space Travel", (new Chapter("Space", 2, "Background_002", "Postcards/Postcard_Space", Color.white, false, "")));
+        Chapters.Add("Cheeky Jungle", (new Chapter("Cheeky Jungle", 3, "Background_008", "Postcards/Postcard_CheekyJungle", Color.white, false, "")));
+        Chapters.Add("Candy Madness", (new Chapter("Candy Island", 1, "Background_009", "Postcards/Postcard_Candyland", Color.white, false, "")));
+        Chapters.Add("Cookie Monster", (new Chapter("Cookie Monsters", 4, "Background_011", "Postcards/Postcard_CookieMonsters", Color.white, false, "")));
+        Chapters.Add("Tricky Lights", (new Chapter("Tricky Lights", 5, "Background_014", "Postcards/Postcard_TrickyLights", Color.white, false, "")));
         Chapters.Add("Tibet", (new Chapter("Tibet", 6, "Background_015", "Postcards/Postcard_Tibet", Color.white, false, "")));
-        Chapters.Add("Halloween", (new Chapter("Halloween", 7, "Background_003", "Postcards/Postcard_Halloween", new Color(0.686275f, 0.933333f, 0.933333f), false, "")));
+        Chapters.Add("Halloween", (new Chapter("Halloween", 7, "Background_003", "Postcards/Postcard_Halloween", Color.white, false, "")));
         Chapters.Add("Fun Fair", (new Chapter("Fun Fair", 8, "Background_016", "Postcards/Postcard_FunFair", Color.white, false, "")));
-        Chapters.Add("Far Islands", (new Chapter("Fancy Island", 9, "Background_004", "Postcards/Postcard_FancyIsland", Color.yellow, false, "")));
-        Chapters.Add("Great Canyon", (new Chapter("Grand Canyon", 10, "Background_005", "Postcards/Postcard_GrandCanyon", new Color(0.498039f, 1f, 0.831373f), false, "")));
-        Chapters.Add("Underworld", (new Chapter("Underwater", 11, "Background_006", "Postcards/Postcard_UnderWater", Color.cyan, false, "")));
-        Chapters.Add("Artic View", (new Chapter("Green Land", 12, "Background_007", "Postcards/Postcard_Greenland", Color.green, false, "")));
-        Chapters.Add("Wonder Land", (new Chapter("Wonderland", 13, "Background_010", "Postcards/Postcard_Wonderland", new Color32(36, 145, 0, 255), false, "")));
+        Chapters.Add("Far Islands", (new Chapter("Fancy Island", 9, "Background_004", "Postcards/Postcard_FancyIsland", Color.white, false, "")));
+        Chapters.Add("Great Canyon", (new Chapter("Grand Canyon", 10, "Background_005", "Postcards/Postcard_GrandCanyon", Color.white, false, "")));
+        Chapters.Add("Underworld", (new Chapter("Underwater", 11, "Background_006", "Postcards/Postcard_UnderWater", Color.white, false, "")));
+        Chapters.Add("Artic View", (new Chapter("Green Land", 12, "Background_007", "Postcards/Postcard_Greenland", Color.white, false, "")));
+        Chapters.Add("Wonder Land", (new Chapter("Wonderland", 13, "Background_010", "Postcards/Postcard_Wonderland", Color.white, false, "")));
 
-        Chapters.Add("Fuji Mountain", (new Chapter("Fuji", 14, "Background_012", "Postcards/Postcard_Fuji", new Color32(255, 0, 221, 255), false, "")));
-        Chapters.Add("Moscow", (new Chapter("Moscow", 15, "Background_013", "Postcards/Postcard_Moscow", new Color32(175, 0, 0, 255), false, "")));
+        Chapters.Add("Fuji Mountain", (new Chapter("Fuji", 14, "Background_012", "Postcards/Postcard_Fuji", Color.white, false, "")));
+        Chapters.Add("Moscow", (new Chapter("Moscow", 15, "Background_013", "Postcards/Postcard_Moscow", Color.white, false, "")));
 
-        Chapters.Add("Dodgeball", (new Chapter("Basketball", 16, "Background_017", "Postcards/Postcard_Basketball", Color.blue, false, "")));
-        Chapters.Add("Great Coliseum", (new Chapter("Colosseum", 17, "Background_018", "Postcards/Postcard_Colosseum", Color.magenta, false, "")));
-        Chapters.Add("Egypt", (new Chapter("Pyramids", 18, "Background_019", "Postcards/Postcard_Egypt", Color.yellow, false, "")));
-		Chapters.Add("Fearless Ski", (new Chapter("Fearless Ski", 19, "Background_021", "Postcards/Postcard_SkiAlps", Color.blue, false, "")));
-        Chapters.Add("London", (new Chapter("London", 20, "Background_001", "Postcards/Postcard_London", new Color(0f, 0f, 0.803922f), false, "")));
+        Chapters.Add("Dodgeball", (new Chapter("Basketball", 16, "Background_017", "Postcards/Postcard_Basketball", Color.white, false, "")));
+        Chapters.Add("Great Coliseum", (new Chapter("Colosseum", 17, "Background_018", "Postcards/Postcard_Colosseum", Color.white, false, "")));
+        Chapters.Add("Egypt", (new Chapter("Pyramids", 18, "Background_019", "Postcards/Postcard_Egypt", Color.white, false, "")));
+		Chapters.Add("Fearless Ski", (new Chapter("Fearless Ski", 19, "Background_021", "Postcards/Postcard_SkiAlps", Color.white, false, "")));
+        Chapters.Add("London", (new Chapter("London", 20, "Background_001", "Postcards/Postcard_London", Color.white, false, "")));
         
     }
 
@@ -123,7 +128,7 @@ public class StateJigsawPuzzle : State
 
             currChapter.Mono.PlayButton.GetComponent<PlayButtonAnimator>().ActivePlay = true;
 
-            m_chapterSelectMono.DemoButton.SetActive(MadLevel.arguments.Equals("Great Canyon"));
+            //m_chapterSelectMono.DemoButton.SetActive(MadLevel.arguments.Equals("Great Canyon"));
 
         }
         else
@@ -152,7 +157,7 @@ public class StateJigsawPuzzle : State
     {
         InitializeChapters();
         //LoadSavedJigsaw();
-        m_patientId = DatabaseXML.Instance.PatientId;
+        m_patientId = NetworkManager.IdUser;
         m_Init = true;
     }
 
@@ -196,7 +201,8 @@ public class StateJigsawPuzzle : State
             }
             //Hiding demo and play button
             currChapter.Mono.PlayButton.SetActive(false);
-            m_chapterSelectMono.DemoButton.SetActive(false);
+            //AndreaLIRO: eliminating demo from here
+            //m_chapterSelectMono.DemoButton.SetActive(false);
         }    
 
     }
@@ -220,8 +226,9 @@ public class StateJigsawPuzzle : State
         {
             animating = false;
             EndRewardAnimation();
-            UnlockBadge();
-            CleanJigsawPiecesValue();
+            //AndreaLIRO_TB: done in UnlockJigsawPiece
+            //UnlockBadge();
+            //CleanJigsawPiecesValue();
             rewardAnimation = false;
             returnToSelectScreen = true;
         }
@@ -230,8 +237,6 @@ public class StateJigsawPuzzle : State
             returnToSelectScreen = false;
             startTimer = true;
             initialTime = Time.time;
-            //Andrea: 30/10 moved to upload manager
-            //m_chapterSelectMono.SavePinballGame();
         }
         else if (startTimer)
         {
@@ -241,8 +246,7 @@ public class StateJigsawPuzzle : State
             {
                 startTimer = false;
                 m_chapterSelectMono.OpenUploadScreen();
-                UploadManager.Instance.EndOfTherapyClean();
-                //MadLevel.LoadLevelByName("World Map Select");
+                UploadManager.Instance.CollectAndBackToMainHub();
             }
         }
     }   
@@ -256,7 +260,7 @@ public class StateJigsawPuzzle : State
                 jigsawObject.SetActive(false);
         }
 
-        DatabaseXML.Instance.SetTimerState(DatabaseXML.TimerType.WorldMap, false);
+        //UploadManager.Instance.SetTimerState(TimerType.WorldMap, false);
     }
 
     #region properties
@@ -362,6 +366,16 @@ public class StateJigsawPuzzle : State
     public void RecordPieceToUnlock(int pieceToUnlock)
     {
         currChapter.JigsawPiecesToUnlock[pieceToUnlock] = true;
+        currChapter.JigsawPeicesUnlocked[pieceToUnlock] = 1.0f;
+        //AndreaLIRO_TB: I am doing here automatically to make sure user don t exit before end of reward causing a big problem on the saving
+        if (currChapter.AllPiecesUnlocked())
+        {
+            UnlockBadge();
+            CleanJigsawPiecesValue();
+            achievementWasReached = true;
+        }
+
+        UploadManager.Instance.SaveGame();
     }
 
     private void FinishJigsawTransition()
@@ -381,8 +395,9 @@ public class StateJigsawPuzzle : State
 
         UnityEngine.GameObject.DestroyImmediate(jigsawUnlocked);
 
-        if (currChapter.AllPiecesUnlocked())
+        if (achievementWasReached)
         {
+            achievementWasReached = false;
             currChapter.Mono.PlayButton.SetActive(false);
             m_chapterSelectMono.EndPuzzleEffect.SetActive(true);
             m_chapterSelectMono.EndPuzzleEffect.GetComponent<Animator>().SetTrigger("StartTrophyAnim");
@@ -451,12 +466,13 @@ public class StateJigsawPuzzle : State
         m_chapterSelectMono.EndPuzzleEffect.SetActive(false);
     }
 
-    private IEnumerator BackToSelectScreen()
-    {
-        yield return new WaitForSeconds(15);
-        Debug.Log("Going back to select screen");
-        MadLevel.LoadLevelByName("World Map Select");
-    }
+    //private IEnumerator BackToSelectScreen()
+    //{
+    //    yield return new WaitForSeconds(15);
+    //    Debug.Log("Going back to select screen");
+    //    //AndreaLiro: we go back to the main hub after finishing the old li loop
+    //    MadLevel.LoadLevelByName("MainHUB");
+    //}
 
     private void CleanLerpers()
     {
@@ -476,24 +492,6 @@ public class StateJigsawPuzzle : State
         //{
         //    return;
         //}
-
-        Dictionary<string, string> dailyTherapy = new Dictionary<string, string>();
-
-        int patient = DatabaseXML.Instance.PatientId;
-        DateTime now = System.DateTime.Now;
-        
-        dailyTherapy.Add("patient", patient.ToString());
-        dailyTherapy.Add("level_start", currLevelPinball.ToString());        
-        dailyTherapy.Add("date", now.ToString("yyyy-MM-dd HH:mm:ss"));
-
-        DatabaseXML.Instance.WriteDatabaseXML(dailyTherapy,DatabaseXML.Instance.therapy_daily_insert);
-
-        dailyTherapy.Clear();
-
-        dailyTherapy.Add("patient", patient.ToString());
-        dailyTherapy.Add("date", now.ToString("yyyy-MM-dd HH:mm:ss"));
-
-        DatabaseXML.Instance.WriteDatabaseXML(dailyTherapy, DatabaseXML.Instance.therapy_session_insert);
 
         StatePinball.Instance.ID = currLevelPinball;//m_Chapters[ID].LevelNumber;
         GameController.Instance.ChangeState(GameController.States.StateChallenge);

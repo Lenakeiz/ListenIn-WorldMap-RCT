@@ -17,7 +17,8 @@ public class StateIdle : State {
     // Use this for initialization
     public override void Init()
     {
-        DatabaseXML.Instance.SetTimerState(DatabaseXML.TimerType.WorldMap, true);
+        UploadManager.Instance.ResetTimer(TimerType.WorldMap);
+        UploadManager.Instance.SetTimerState(TimerType.WorldMap, true);
     }
 
     // Update is called once per frame
@@ -27,6 +28,6 @@ public class StateIdle : State {
 
     public override void Exit()
     {
-        //DatabaseXML.Instance.SetTimerState(DatabaseXML.TimerType.WorldMap, false);
+        UploadManager.Instance.SetTimerState(TimerType.WorldMap, false);
     }
 }

@@ -27,7 +27,7 @@ public class MadPathChecker : MonoBehaviour {
         lastLevelUnlocked = MadLevel.GetOrdeal(lastUnlockedLevelName, MadLevel.Type.Level);
         string[] levelNames = MadLevel.GetAllLevelNames(MadLevel.Type.Level);
 
-        GameObject unlocked = gameObject.transform.FindChild("Unlocked").gameObject;
+        GameObject unlocked = gameObject.transform.Find("Unlocked").gameObject;
         if (unlocked == null)
         {
             Debug.LogError("Unlocked paths not found");
@@ -36,7 +36,7 @@ public class MadPathChecker : MonoBehaviour {
 
         bool allBronzeUnlocked = true;
 
-        unlockedSpriteRender = unlocked.transform.FindChild("PathArrow").gameObject.GetComponent<SpriteRenderer>();
+        unlockedSpriteRender = unlocked.transform.Find("PathArrow").gameObject.GetComponent<SpriteRenderer>();
         Sprite arrowSprite = null;
 
         if (levelNames.Length == levelNames.Length)
@@ -65,7 +65,7 @@ public class MadPathChecker : MonoBehaviour {
 
         unlockedSpriteRender.sprite = arrowSprite;
 
-        GameObject blinkingPath = gameObject.transform.FindChild("Activated").gameObject;
+        GameObject blinkingPath = gameObject.transform.Find("Activated").gameObject;
 
         if (blinkingPath == null)
         {
@@ -73,7 +73,7 @@ public class MadPathChecker : MonoBehaviour {
             return;
         }
 
-        GameObject nextPath = blinkingPath.transform.FindChild(string.Format("Path_{0}(Activated)", lastLevelUnlocked)).gameObject;
+        GameObject nextPath = blinkingPath.transform.Find(string.Format("Path_{0}(Activated)", lastLevelUnlocked)).gameObject;
 
         if (nextPath == null)
         {

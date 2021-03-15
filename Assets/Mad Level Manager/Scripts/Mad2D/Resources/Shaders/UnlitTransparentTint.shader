@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 // Unlit alpha-blended shader with tint color.
 // - no lighting
 // - no lightmap support
@@ -40,7 +42,7 @@ Shader "Tools/Mad Level Manager/Unlit/Transparent Tint" {
 
             v2f vert (appdata v) {
                 v2f o;
-                o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
+                o.pos = UnityObjectToClipPos (v.vertex);
                 o.uv = TRANSFORM_TEX (v.texcoord, _MainTex);
                 o.color = v.color;
                 return o;

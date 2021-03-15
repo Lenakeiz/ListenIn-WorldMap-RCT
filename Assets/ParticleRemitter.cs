@@ -9,9 +9,9 @@ public class ParticleRemitter : MonoBehaviour {
 
     void Awake()
     {
-        glowParticle = transform.FindChild("Glow").gameObject.GetComponent<ParticleSystem>();
-        lightParticle = transform.FindChild("Light").gameObject.GetComponent<ParticleSystem>();
-        ringParticle = transform.FindChild("Ring").gameObject.GetComponent<ParticleSystem>();
+        glowParticle = transform.Find("Glow").gameObject.GetComponent<ParticleSystem>();
+        lightParticle = transform.Find("Light").gameObject.GetComponent<ParticleSystem>();
+        ringParticle = transform.Find("Ring").gameObject.GetComponent<ParticleSystem>();
     }
     
     void OnEnable()

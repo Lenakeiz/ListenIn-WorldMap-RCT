@@ -6,6 +6,8 @@
 using UnityEngine;
 using MadLevelManager;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class MadLevelYouAreHereScript : MonoBehaviour {
 
@@ -35,8 +37,8 @@ public class MadLevelYouAreHereScript : MonoBehaviour {
 
     void Update() {
         if (initialized) {
-            float xChange = Mathf.Sin(Time.time * animationSpeed) * animationAmplitude;
-            transform.position = lastUnlockedTransform.position + offset + new Vector3(xChange, 0, 0);
+            float yChange = Mathf.Sin(Time.time * animationSpeed) * animationAmplitude;
+            transform.position = lastUnlockedTransform.position + offset + new Vector3(0, yChange, 0);
         }
     }
 
@@ -56,15 +58,15 @@ public class MadLevelYouAreHereScript : MonoBehaviour {
         var lastUnlockedLevelName = MadLevel.FindLastUnlockedLevelName(group.name);
         int lastLevelUnlocked = MadLevel.GetOrdeal(lastUnlockedLevelName, MadLevel.Type.Level);
 
-        string[] levelNames = MadLevel.GetAllLevelNames(MadLevel.Type.Level);
+        List<string> levelNames = MadLevel.GetAllLevelNames(MadLevel.Type.Level).ToList();
         lastUnlockedLevelName = levelNames[lastLevelUnlocked - 1];
-
-        if (lastLevelUnlocked == levelNames.Length && MadLevelProfile.GetLevelBoolean(lastUnlockedLevelName, "jigsaw_1"))
+        
+        if (lastLevelUnlocked == levelNames.Count && MadLevelProfile.GetLevelBoolean(lastUnlockedLevelName, "jigsaw_1"))
         {
             //All levels unlocked, let point to the level with less cup won
-            int[] scorePoints = new int[levelNames.Length];
+            int[] scorePoints = new int[levelNames.Count];
 
-            for (int i = 0; i < levelNames.Length; i++)
+            for (int i = 0; i < levelNames.Count; i++)
             {
                 int currScore = i;
                 if (MadLevelProfile.GetLevelBoolean(levelNames[i], "jigsaw_1"))
@@ -83,15 +85,42 @@ public class MadLevelYouAreHereScript : MonoBehaviour {
             }
 
             int bestScore = 10000;
+            int maximumTotalScore = 20000 + 2000 + 200 + ((19 * 20) / 2) - 1;
             int bestLevelIdx = 0;
+            int currTotalScore = -1;
+            //Calculate currScore
             for (int i = 0; i < scorePoints.Length; i++)
             {
-                if (bestScore > scorePoints[i])
+                currTotalScore += scorePoints[i];
+            }
+
+            Debug.Log("Last PLayed level: " + MadLevel.lastPlayedLevelName);
+
+            if (currTotalScore == maximumTotalScore)
+            {
+                //Choose a random level to start
+                if (MadLevel.lastPlayedLevelName == "Null" || MadLevel.lastPlayedLevelName == "Setup Screen")
                 {
-                    bestScore = scorePoints[i];
-                    bestLevelIdx = i;
+                    bestLevelIdx = UnityEngine.Random.Range(0, levelNames.Count);
+                }
+                else
+                {
+                    bestLevelIdx = levelNames.FindIndex(x => x == MadLevel.lastPlayedLevelName);
+                    bestLevelIdx++;
+                    bestLevelIdx = bestLevelIdx % levelNames.Count;
                 }
             }
+            else
+            {
+                for (int i = 0; i < scorePoints.Length; i++)
+                {
+                    if (bestScore > scorePoints[i])
+                    {
+                        bestScore = scorePoints[i];
+                        bestLevelIdx = i;
+                    }
+                }
+            }            
 
             lastUnlockedLevelName = levelNames[bestLevelIdx];
 

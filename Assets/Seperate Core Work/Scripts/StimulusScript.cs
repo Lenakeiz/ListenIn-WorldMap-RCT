@@ -3,6 +3,7 @@ using System.Collections;
 
 public class StimulusScript : MonoBehaviour {
 
+    public long m_registeredID;
 	GameObject m_goImage;
 	GameObject m_goRectangle;
 	Animator m_anim;
@@ -13,6 +14,7 @@ public class StimulusScript : MonoBehaviour {
 
 	public Vector3 throwPosition;
 	public Vector3 endPosition;
+    private float scaleSize;
 	float throwingSpeed = 1.5f;
 
     private bool initialize = false;
@@ -21,9 +23,10 @@ public class StimulusScript : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------
 	void Start () 
 	{
-		m_goImage = transform.FindChild("PictureFrame").gameObject;
-		//m_goRectangle = transform.FindChild("Rectangle").gameObject;
-		m_anim = GetComponent<Animator> ();
+		m_goImage = transform.Find("PictureFrame").gameObject;
+        scaleSize = m_goImage.transform.localScale.x;
+        //m_goRectangle = transform.FindChild("Rectangle").gameObject;
+        m_anim = GetComponent<Animator> ();
 
 		currState = StimulusState.Idle;
 	}
@@ -88,16 +91,29 @@ public class StimulusScript : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------
 	public void SetStimulusImage (string strImage) 
 	{
-		if (!m_goImage)
-			m_goImage = transform.FindChild("PictureFrame").gameObject;
+        try
+        {
+            if (!m_goImage)
+                m_goImage = transform.Find("PictureFrame").gameObject;
 
-		// retrieve image from the Resource folder
-		m_goImage.GetComponent<SpriteRenderer> ().sprite = Resources.Load(strImage, typeof(Sprite)) as Sprite;
+            // retrieve image from the Resource folder
+            Sprite currSprite = Resources.Load(strImage, typeof(Sprite)) as Sprite;
 
-		// scale sprite to smaller size
-		Vector3 scale = new Vector3(2, 2, 1);   // new Vector3(0.65f, 0.65f, 1);
-		m_goImage.transform.localScale = scale;
+            if (currSprite == null)
+            {
+                Debug.LogWarning("Loading an empty sprite");
+            }
 
+            m_goImage.GetComponent<SpriteRenderer>().sprite = currSprite;
+
+            // scale sprite to smaller size
+            Vector3 scale = new Vector3(scaleSize, scaleSize, 1);   // new Vector3(0.65f, 0.65f, 1);
+            m_goImage.transform.localScale = scale;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log("StumulusScript: " + ex.Message);
+        }
 	}
 
 	//----------------------------------------------------------------------------------------------------

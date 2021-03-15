@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: 859021bc2590db5438d973c87c1764e7
+timeCreated: 1520900677
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: FireButtons_RO_0
+    21300002: FireButtons_RO_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: FireButtons_RO_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 2
+        width: 325
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 145.5, y: -81}
+        - {x: 158.5, y: -46}
+        - {x: 162.5, y: -28}
+        - {x: 162.5, y: 19}
+        - {x: 157.5, y: 42}
+        - {x: 149.5, y: 70}
+        - {x: 128.5, y: 101}
+        - {x: 104.5, y: 125}
+        - {x: 81.5, y: 145}
+        - {x: 49.5, y: 157}
+        - {x: 27.5, y: 162}
+        - {x: -23.5, y: 162}
+        - {x: -46.5, y: 158}
+        - {x: -78.5, y: 146}
+        - {x: -100.5, y: 129}
+        - {x: -126.5, y: 103}
+        - {x: -144.5, y: 82}
+        - {x: -149.5, y: 74}
+        - {x: -162.5, y: 31}
+        - {x: -162.5, y: -24}
+        - {x: -159.5, y: -40}
+        - {x: -147.5, y: -75}
+        - {x: -129.5, y: -102}
+        - {x: -104.5, y: -127}
+        - {x: -80.5, y: -145}
+        - {x: -75.5, y: -147}
+        - {x: -52.5, y: -157}
+        - {x: -32.5, y: -162}
+        - {x: 28.5, y: -162}
+        - {x: 67.5, y: -152}
+        - {x: 101.5, y: -129}
+        - {x: 128.5, y: -103}
+    - name: FireButtons_RO_1
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 2
+        width: 324
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 126, y: -106}
+        - {x: 143, y: -87}
+        - {x: 160, y: -50}
+        - {x: 162, y: -37}
+        - {x: 162, y: 25}
+        - {x: 157, y: 48}
+        - {x: 148, y: 72}
+        - {x: 129, y: 101}
+        - {x: 105, y: 126}
+        - {x: 81, y: 145}
+        - {x: 48, y: 159}
+        - {x: 31, y: 162}
+        - {x: -25, y: 162}
+        - {x: -47, y: 156}
+        - {x: -66, y: 151}
+        - {x: -103, y: 129}
+        - {x: -121, y: 110}
+        - {x: -146, y: 79}
+        - {x: -158, y: 48}
+        - {x: -162, y: 25}
+        - {x: -162, y: -23}
+        - {x: -159, y: -41}
+        - {x: -152, y: -67}
+        - {x: -130, y: -102}
+        - {x: -103, y: -128}
+        - {x: -76, y: -148}
+        - {x: -46, y: -159}
+        - {x: -29, y: -162}
+        - {x: 26, y: -162}
+        - {x: 43, y: -158}
+        - {x: 68, y: -152}
+        - {x: 103, y: -129}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

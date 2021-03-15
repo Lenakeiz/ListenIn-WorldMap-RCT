@@ -46,6 +46,7 @@ public class CardBucketController : MonoBehaviour {
         progressionFiller = image;
         initVal = (int)(currentProgress * threshold);
     }
+
     void Start()
     {
         GetChildComponents();
@@ -103,11 +104,11 @@ public class CardBucketController : MonoBehaviour {
     {
         if (m_JigsawPeiceToUnlock != -1)
         {
-            StatePinball.Instance.m_PinballMono.EarnedJigsaw.Add(transform.FindChild("JigsawPlaceholder").gameObject as GameObject);
+            StatePinball.Instance.m_PinballMono.EarnedJigsaw.Add(transform.Find("JigsawPlaceholder").gameObject as GameObject);
             StatePinball.Instance.m_PinballMono.EarnedJigsawTransforms.Add(transform);
 
             textReward.GetComponent<Animator>().SetTrigger("activateTextReward");
-            transform.FindChild("JigsawPlaceholder").GetComponent<Animator>().SetTrigger("triggerReward");// GetComponentInChildren<Animator>().SetTrigger("triggerReward");
+            transform.Find("JigsawPlaceholder").GetComponent<Animator>().SetTrigger("triggerReward");// GetComponentInChildren<Animator>().SetTrigger("triggerReward");
 
             StateJigsawPuzzle.Instance.RecordPieceToUnlock(m_JigsawPeiceToUnlock);
 

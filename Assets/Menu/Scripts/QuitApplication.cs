@@ -7,8 +7,8 @@ public class QuitApplication : MonoBehaviour {
 	public void Quit()
 	{
         //If we are running in a standalone build of the game
-        ListenIn.Logger.Instance.Log("Starting quit routine", ListenIn.LoggerMessageType.Info);
-		GameStateSaver.Instance.Save();
+        Debug.Log("Starting LISTEN IN quit routine");
+		GameStateSaver.Instance.SaveGameProgress();
 		Application.Quit();
 
 		//If we are running in the editor
@@ -18,9 +18,12 @@ public class QuitApplication : MonoBehaviour {
 	#endif
 	}
 
+    /// <summary>
+    /// DEPRECATED
+    /// </summary>
 	public void ResetSavedGameState()
 	{
-		GameStateSaver.Instance.Reset();
+		GameStateSaver.Instance.ResetGameProgress();
         MadLevelProfile.Reset();
         Application.Quit();
 		#if UNITY_EDITOR
@@ -28,4 +31,17 @@ public class QuitApplication : MonoBehaviour {
 		UnityEditor.EditorApplication.isPlaying = false;
 		#endif
 	}
+
+    public void SimpleQuit()
+    {
+        //If we are running in a standalone build of the game
+        Application.Quit();
+
+        //If we are running in the editor
+#if UNITY_EDITOR
+        //Stop playing the scene
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
 }

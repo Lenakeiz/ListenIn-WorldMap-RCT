@@ -29,7 +29,7 @@ public class LevelTwoManager : ILevel {
     protected override void Start()
 	{
         base.Start();
-		spaceship =  gameObject.transform.FindChild("Spaceship").gameObject;
+		spaceship =  gameObject.transform.Find("Spaceship").gameObject;
 	}
 	
 	// Update is called once per frame

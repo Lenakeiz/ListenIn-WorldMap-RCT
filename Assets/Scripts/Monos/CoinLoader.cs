@@ -25,7 +25,7 @@ public class CoinLoader : MonoBehaviour {
 
     public void FinishedTransition()
     {
-        GameObject obj = this.gameObject.transform.FindChild("2D_LightCharge").gameObject;
+        GameObject obj = this.gameObject.transform.Find("2D_LightCharge").gameObject;
         Rigidbody2D body = GetComponent<Rigidbody2D>();
         body.simulated = false;
         obj.SetActive(true);

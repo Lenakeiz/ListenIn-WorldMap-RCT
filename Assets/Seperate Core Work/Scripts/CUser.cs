@@ -80,7 +80,7 @@ class CUser
         m_strUserId = strUserId;
         m_intDatasetId = intDatasetId;
         loadUserProfile();
-        Console.WriteLine("m_strUserId = " + m_strUserId + " noise level = " + m_intCurNoiseLevel + " corpus complexity = " + m_dCorpusTotalComplexity);
+        Debug.Log("CUser: loadProfile() m_strUserId = " + m_strUserId + " noise level = " + m_intCurNoiseLevel + " corpus complexity = " + m_dCorpusTotalComplexity);
 
         //loadTherapyBlocks();
         loadTherapyBlocks_Csv();
@@ -102,52 +102,6 @@ class CUser
         saveUserProfileToXml();
         //loadTherapyBlocks();
     }
-
-    //----------------------------------------------------------------------------------------------------
-    // resetUserProfile
-    //----------------------------------------------------------------------------------------------------
-    /*public void resetUserProfile()
-    {
-        //m_strAppPath = strAppPath;
-
-        int intUserId = Convert.ToInt32(m_strUserId);
-        intUserId++;
-        m_strUserId = intUserId.ToString();
-        Console.WriteLine("m_strUserId = " + m_strUserId);
-
-        m_intCurNoiseLevel++;
-        if (m_intCurNoiseLevel > 5)
-            m_intCurNoiseLevel = 0;
-
-        loadTherapyBlocks();
-        loadChallengeItemFeatures_History();
-    }
-
-    //----------------------------------------------------------------------------------------------------
-    // reloadUserProfile
-    //----------------------------------------------------------------------------------------------------
-    public void reloadUserProfile(bool bIncreaseNoiseLevel, List<CChallengeItemFeatures> lsChallengeItemFeatures)
-    {
-        // check whether to increase or decrease noise level
-        if (bIncreaseNoiseLevel)
-        {
-            m_intCurNoiseLevel++;
-            if (m_intCurNoiseLevel > 5)
-                m_intCurNoiseLevel = 5;
-        }
-        else
-        {
-            m_intCurNoiseLevel--;
-            if (m_intCurNoiseLevel < 0)
-                m_intCurNoiseLevel = 0;
-        }
-        saveUserProfileToXml();
-
-        loadTherapyBlocks();
-        loadChallengeItemFeatures_History();
-        loadChallengeItemFeatures_HistoryComplexity();
-        //loadLexicalItem_History(lsLexicalItem);
-    }*/
 
     //----------------------------------------------------------------------------------------------------
     // getCurNoiseLevel
@@ -341,7 +295,11 @@ class CUser
         //string strXmlFile = m_strAppPath + "user_" + m_strUserId + "_profile.xml";
         string strXmlFile = System.IO.Path.Combine(m_strAppPath, "user_" + m_strUserId + "_profile.xml");
         if (!System.IO.File.Exists(strXmlFile))
+        {
+            Debug.Log(String.Format("CUser: loadUserProfile() unable to load {0}", strXmlFile));
             return;
+        }
+            
 
         XElement root = XElement.Load(strXmlFile);
 
@@ -396,7 +354,11 @@ class CUser
         string strXmlFile = System.IO.Path.Combine(m_strAppPath, "user_" + m_strUserId + "_therapyblocks.xml");
         Console.WriteLine("loadTherapyBlocks = " + strXmlFile);
         if (!System.IO.File.Exists(strXmlFile))
+        {
+            Debug.Log(String.Format("CUser: loadUserProfile() unable to load {0}", strXmlFile));
             return;
+        }
+
 
         XElement root = XElement.Load(strXmlFile);
 
@@ -472,9 +434,13 @@ class CUser
 
         // check if file exists
         //string strXmlFile = m_strAppPath + "user_" + m_strUserId + "_therapyblocks.xml";
-        string strCsvFile = System.IO.Path.Combine(m_strAppPath, "user_" + m_strUserId + "_therapyblocks.csv");       
+        string strCsvFile = System.IO.Path.Combine(m_strAppPath, "user_" + m_strUserId + "_therapyblocks.csv");
         if (!System.IO.File.Exists(strCsvFile))
+        {
+            Debug.Log(String.Format("CUser: loadTherapyBlocks_Csv() unable to load {0}", strCsvFile));
             return;
+        }
+            
 
         string strWholeFile = System.IO.File.ReadAllText(strCsvFile);
 
@@ -591,19 +557,11 @@ class CUser
         string strXmlFile = System.IO.Path.Combine(m_strAppPath, "user_" + m_strUserId + "_challengeitemfeatures_history.xml");
 
         if (!System.IO.File.Exists(strXmlFile))
+        {
+            Debug.Log(String.Format("CUser: loadChallengeItemFeatures_History() unable to load {0}", strXmlFile));
             return;
-
-        /*
-        <item idx="0">
-            <challengeItemIdx>0</challengeItemIdx>			  			  	
-            <presentHistory>
-                <history sessionIdx="0" blockIdx="0" acc="0" /history>
-                <history sessionIdx="0" blockIdx="0" acc="0" /history>
-                <history sessionIdx="0" blockIdx="0" acc="0" /history>
-            </presentHistory>          
-        </item> 
-        */
-
+        }
+            
         XElement root = XElement.Load(strXmlFile);
 
         m_lsChallengeItemFeatures_History = (
@@ -826,6 +784,7 @@ class CUser
 
         if (!System.IO.File.Exists(strCsvFile))
         {
+            Debug.Log("CUSer: loadLexicalItem_HistoryExposure() Creating basic history exposure");
             // set up user's history with the 0 exposure
             for (int k = 0; k < m_lsLexicalItem.Count; k++)
             {
@@ -1149,17 +1108,6 @@ class CUser
             therapyBlock.m_lsResponseRtSec.Add(Math.Round(lsResponseRtSec[i], 4));
             intTotalAccuracy += lsResponse[i];
 
-            // calculate complexity
-            /*double dItemOriginalComplexity = m_lsChallengeItemFeatures_HistoryComplexity[lsChallengeItemFeaturesIdx[i]].m_lsComplexity_Overall.First();
-
-            double dItemCurComplexity = m_lsChallengeItemFeatures_HistoryComplexity[lsChallengeItemFeaturesIdx[i]].m_lsComplexity_Overall.Last();
-
-            int intChallengeItemIdx = m_lsChallengeItemFeatures[lsChallengeItemFeaturesIdx[i]].m_intChallengeItemIdx;
-            double dChallengeItemCurComplexity = m_lsChallengeItem_HistoryComplexity[intChallengeItemIdx].m_lsComplexity.Last();
-
-            int intLexicalItemIdx = m_lsChallengeItem[intChallengeItemIdx].m_intLexicalItemIdx;
-            double dLexicalItemCurComplexity = m_lsLexicalItem_HistoryComplexity[intLexicalItemIdx].m_lsComplexity.Last();*/
-
             double dComplexity = Math.Round(m_lsChallengeItemFeatures[lsChallengeItemFeaturesIdx[i]].m_dComplexity_Overall, 4);  // Math.Round(dItemCurComplexity * dChallengeItemCurComplexity * dLexicalItemCurComplexity, 4);
             therapyBlock.m_lsChallengeItemFeatures_Complexity.Add(dComplexity);
             dTotalComplexity += dComplexity;
@@ -1239,48 +1187,11 @@ class CUser
             if (lastTherapyBlock != null)
                 therapyBlock.m_dUserAbility_Accumulated = Math.Round(lastTherapyBlock.m_dUserAbility_Accumulated + lastTherapyBlock.m_dTrainingStep, 4);
         }
-        /*else
-        {
-            //max - persons.Max(p => p.age); min - persons.Min(p => p.age);
-            //double dMin = therapyBlock.m_lsChallengeItemFeatures_Complexity.Min(p => p);
-            //double dMax = therapyBlock.m_lsChallengeItemFeatures_Complexity.Max(p => p);
-
-            double dTotal = 0;
-            int intCtr = 0;
-            // find median & mean
-            List<double> lsComplexity = new List<double>();
-            for (int i = 0; i < m_lsTherapyBlock.Count; i++)
-            {
-                if ((m_lsTherapyBlock[i].m_intNoiseLevel == 0) && (m_lsTherapyBlock[i].m_intBlockType == 0))
-                    for (int j = 0; j < m_lsTherapyBlock[i].m_lsChallengeItemFeatures_Complexity.Count; j++)
-                    {
-                        if (m_lsTherapyBlock[i].m_lsResponseAccuracy[j] == 1)
-                        {
-                            intCtr++;
-                            dTotal += m_lsTherapyBlock[i].m_lsChallengeItemFeatures_Complexity[j];
-                            int intIdx = lsComplexity.FindIndex(a => a == m_lsTherapyBlock[i].m_lsChallengeItemFeatures_Complexity[j]);
-                            if (intIdx <= -1)
-                            {
-                                lsComplexity.Add(m_lsTherapyBlock[i].m_lsChallengeItemFeatures_Complexity[j]);
-                                Console.WriteLine("complexity = " + m_lsTherapyBlock[i].m_lsChallengeItemFeatures_Complexity[j]);
-                            }
-                        }
-                    }
-            }
-            lsComplexity = lsComplexity.OrderBy(p => p).ToList();
-            int intMidPoint = (lsComplexity.Count() / 2);
-            therapyBlock.m_dUserAbility = lsComplexity[intMidPoint]; // Math.Round ((dMin+dMax)/2, 4);   //dLastUserAbility;
-            //therapyBlock.m_dUserAbility = (lsComplexity[0] + lsComplexity[lsComplexity.Count - 1]) / 2; // Math.Round(dTotal / (double)intCtr, 4);
-            Console.WriteLine("complexity median = " + therapyBlock.m_dUserAbility);
-        }*/
 
         if (therapyBlock.m_dAccuracyRate >= 0.7)
         {
-            therapyBlock.m_dTrainingStep = 0.002;  // 0.001;  // cannot be too high coz it will come to a point where there is not enough easy items
-                                                   /*int intIdx = m_lsCifComplexity_Distinct.FindIndex(a => a > therapyBlock.m_dUserAbility);
-                                                   if (intIdx > -1)
-                                                       therapyBlock.m_dUserAbility = m_lsCifComplexity_Distinct[intIdx];*/
-                                                   //therapyBlock.m_dUserAbility = therapyBlock.m_dUserAbility + therapyBlock.m_dTrainingStep;
+            therapyBlock.m_dTrainingStep = 0.002;
+
             therapyBlock.m_dNextBlock_DiversityThresholdUpper = getCifComplexity_Distinct(therapyBlock.m_dUserAbility_Accumulated, 3); // - therapyBlock.m_dUserAbility; 
             if (therapyBlock.m_dNextBlock_DiversityThresholdUpper < 0)
                 therapyBlock.m_dNextBlock_DiversityThresholdUpper = m_dCorpusComplexity_StdDeviation * 0.2;
@@ -1303,97 +1214,6 @@ class CUser
                 therapyBlock.m_dNextBlock_DiversityThresholdUpper = m_dCorpusComplexity_StdDeviation * 0.2;
             therapyBlock.m_dNextBlock_DiversityThresholdLower = /*therapyBlock.m_dUserAbility -*/ getCifComplexity_Distinct(therapyBlock.m_dUserAbility_Accumulated, -3);  //m_dCorpusComplexity_StdDeviation * 0.2;
         }
-        // 2016-07-23
-        /*if (therapyBlock.m_dAccuracyRate >= 0.7)
-        {
-            //dAverageAbility = Math.Round(((double)dTotalComplexity_Correct / intCorrectResponseCtr) + 0.01, 4);
-            //therapyBlock.m_dUserAbility = dAverageAbility;
-            if (dCorerctDifference > 0)
-                therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dCorerctDifference, 4);  // increase by dCorerctDifference
-            else
-                therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + 0.001, 4);  // increase by 0.01
-        }
-        else if (therapyBlock.m_dAccuracyRate <= 0.4)
-        {
-            if (dIncorerctDifference < 0)
-                therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dCorerctDifference, 4);  // regress by incorerctDifference
-            else
-                therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility - 0.01, 4);  // regress by 0.01
-        }
-        else
-        {
-            if ((dCorerctDifference > 0) && (dIncorerctDifference > 0) && (dIncorerctDifference > dCorerctDifference))
-                therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dCorerctDifference, 4);  // increase by dCorerctDifference
-            else if ((dCorerctDifference > 0) && (dIncorerctDifference > 0))
-                therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + ((dCorerctDifference + dIncorerctDifference) / 2), 4); // increase by average
-            else if ((dCorerctDifference > 0) && (dIncorerctDifference == 0))
-                therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dCorerctDifference, 4);  // increase by dCorerctDifference
-            else if ((dCorerctDifference > 0) && (dIncorerctDifference < 0))
-                therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dIncorerctDifference, 4);  // regress by dIncorerctDifference
-            //else if ((dCorerctDifference < 0) && (dIncorerctDifference > 0))
-            //    therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dCorerctDifference, 4);  // regress by dCorerctDifference
-            //else if ((dCorerctDifference < 0) && (dIncorerctDifference < 0) && (dIncorerctDifference < dCorerctDifference))
-            //    therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dIncorerctDifference, 4);  // regress by dIncorerctDifference
-            else if ((dCorerctDifference < 0) && (dIncorerctDifference < 0))
-                therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + ((dCorerctDifference + dIncorerctDifference) / 2), 4);  // regress by dCorerctDifference
-            //else if ((dCorerctDifference < 0) && (dIncorerctDifference == 0))
-            //    therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dCorerctDifference, 4);  // regress by dCorerctDifference
-        }
-        */
-        /*if ((dCorerctDifference > 0) && (dIncorerctDifference < 0))
-            therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + ((dCorerctDifference + dIncorerctDifference) / 2), 4);
-        else if (dCorerctDifference > 0)
-            therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dCorerctDifference, 4);
-        else if (dIncorerctDifference < 0)
-            therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dIncorerctDifference, 4);
-*/
-        //Console.WriteLine("save: lastUserAbility = " + dLastUserAbility + " correctDifference = " + dCorerctDifference + " incorrectDifference = " + dIncorerctDifference + " userAbility = " + therapyBlock.m_dUserAbility);
-
-        /*
-        double dImprovement = Math.Round(dTotalComplexity_Correct / m_dCorpusTotalComplexity, 4); // dAverageAbility - dLastUserAbility;         
-        double dRegression = Math.Round(dTotalComplexity_Incorrect / m_dCorpusTotalComplexity, 4);
-        therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility + dImprovement - dRegression, 4);
-        */
-
-        // penalise user ability
-        /*double dAverageIncorrect = 0;
-        double dRegression = 0;
-        if (intIncorrectResponseCtr > 0)
-        {
-            dAverageIncorrect = Math.Round(((double)dTotalComplexity_Incorrect / intIncorrectResponseCtr), 4);
-            dRegression = dAverageIncorrect - dLastUserAbility;
-            //therapyBlock.m_dUserAbility -= Math.Sqrt(Math.Pow(dRegression, 2));
-        }
-        if (therapyBlock.m_dAccuracyRate >= CConstants.g_dUserAccuracyThresholdMax)
-        {
-            // because the lexical item's complexity values are reduced by 2% for every correct response, so it might happen that the dImprovement < 0 
-            if (dImprovement > 0)
-                therapyBlock.m_dUserAbility = dLastUserAbility + dImprovement;
-            else
-                therapyBlock.m_dUserAbility = dLastUserAbility;
-        }                
-        else if (therapyBlock.m_dAccuracyRate <= CConstants.g_dUserAccuracyThresholdMin)
-        {
-            therapyBlock.m_dUserAbility = Math.Round(dLastUserAbility - Math.Sqrt(Math.Pow(dRegression, 2)), 4);
-            if (therapyBlock.m_dUserAbility < 0)
-                therapyBlock.m_dUserAbility = 0;
-        }            
-        else
-            therapyBlock.m_dUserAbility = dLastUserAbility; */
-
-        //Console.WriteLine("save: lastUserAbility = " + dLastUserAbility + " improvement = " + dImprovement + " regression = " + dRegression + " userAbility = " + therapyBlock.m_dUserAbility);
-        //Console.WriteLine("save: lastUserAbility = " + dLastUserAbility + " userAbility = " + therapyBlock.m_dUserAbility);
-
-        /*double dIncrementFactor = 0;
-        double dLastUserAbility = getLastTherapyBlock_UserAbility();
-        if (therapyBlock.m_dAccuracyRate > CConstants.g_dUserAccuracyThresholdMax)
-            dIncrementFactor = dLastUserAbility * CConstants.g_dUserAccuracyFactor;
-        else if (therapyBlock.m_dAccuracyRate < CConstants.g_dUserAccuracyThresholdMax)
-            dIncrementFactor = -(dLastUserAbility * CConstants.g_dUserAccuracyFactor);
-        if (dLastUserAbility == 0)
-            therapyBlock.m_dUserAbility = Math.Round(((double)dTotalAbility / (double)lsResponse.Count), 4);
-        else
-            therapyBlock.m_dUserAbility = dLastUserAbility + Math.Round(dIncrementFactor, 4);*/
 
         therapyBlock.m_dMean_Frequency = Math.Round(dMean_Frequency, 4);
         therapyBlock.m_dMean_Concreteness = Math.Round(dMean_Concreteness, 4);
@@ -1452,6 +1272,7 @@ class CUser
             m_lsForcedBlockHistory_Weekly.Last().m_lsForcedBlockHistory_Daily.Last().m_lsBlockIdx.Add(m_lsTherapyBlock.Count - 1);
         }
 
+        //Andrea Pedro - WARNING
         // save to xml
         saveUserProfileToXml();
         //saveTherapyBlocksToXml();
@@ -1525,9 +1346,9 @@ class CUser
             "</root>");
 
         // Save the document to a file. White space is preserved (no white space).
-        //string strXmlFile = m_strAppPath + "user_" + m_strUserId + "_profile.xml";   //m_strAppPath + "user_profile.xml";
         string strXmlFile = System.IO.Path.Combine(m_strAppPath, "user_" + m_strUserId + "_profile.xml");
         
+        //???
         string strXmlFileNew = strXmlFile + ".new";
         string strXmlFileOld = strXmlFile + ".old";
 
@@ -1631,12 +1452,12 @@ class CUser
         }
         catch (System.Xml.XmlException ex)
         {
-            ListenIn.Logger.Instance.Log("CUser-saveUserProfileToXml-" + ex.Message, ListenIn.LoggerMessageType.Info);
+            //ListenIn.Logger.Instance.Log("CUser-saveUserProfileToXml-" + ex.Message, ListenIn.LoggerMessageType.Info);
         }
         catch (Exception e)
         {
             //Console.WriteLine("The process failed: {0}", e.ToString());
-            ListenIn.Logger.Instance.Log("CUser-saveUserProfileToXml-" + e.ToString(), ListenIn.LoggerMessageType.Info);
+            //ListenIn.Logger.Instance.Log("CUser-saveUserProfileToXml-" + e.ToString(), ListenIn.LoggerMessageType.Info);
         }
     }
 
@@ -1842,12 +1663,12 @@ class CUser
         }
         catch (System.Xml.XmlException ex)
         {
-            ListenIn.Logger.Instance.Log("CUser-saveTherapyBlocksToXml-" + ex.Message, ListenIn.LoggerMessageType.Info);
+            //ListenIn.Logger.Instance.Log("CUser-saveTherapyBlocksToXml-" + ex.Message, ListenIn.LoggerMessageType.Info);
         }
         catch (Exception e)
         {
             //Console.WriteLine("The process failed: {0}", e.ToString());
-            ListenIn.Logger.Instance.Log("CUser-saveTherapyBlocksToXml-" + e.ToString(), ListenIn.LoggerMessageType.Info);
+            //ListenIn.Logger.Instance.Log("CUser-saveTherapyBlocksToXml-" + e.ToString(), ListenIn.LoggerMessageType.Info);
         }
     }
 
@@ -1942,12 +1763,12 @@ class CUser
         }
         catch (System.Xml.XmlException ex)
         {
-            ListenIn.Logger.Instance.Log("CUser-saveTherapyBlocksToCsv-" + ex.Message, ListenIn.LoggerMessageType.Info);
+            //ListenIn.Logger.Instance.Log("CUser-saveTherapyBlocksToCsv-" + ex.Message, ListenIn.LoggerMessageType.Info);
         }
         catch (Exception e)
         {
             //Console.WriteLine("The process failed: {0}", e.ToString());
-            ListenIn.Logger.Instance.Log("CUser-saveTherapyBlocksToCsv-" + e.ToString(), ListenIn.LoggerMessageType.Info);
+            //ListenIn.Logger.Instance.Log("CUser-saveTherapyBlocksToCsv-" + e.ToString(), ListenIn.LoggerMessageType.Info);
         }
     }
 
@@ -2050,12 +1871,12 @@ class CUser
         }
         catch (System.Xml.XmlException ex)
         {
-            ListenIn.Logger.Instance.Log("CUser-saveChallengeItemFeaturesHistoryToXml-" + ex.Message, ListenIn.LoggerMessageType.Info);
+            //ListenIn.Logger.Instance.Log("CUser-saveChallengeItemFeaturesHistoryToXml-" + ex.Message, ListenIn.LoggerMessageType.Info);
         }
         catch (Exception e)
         {
             //Console.WriteLine("The process failed: {0}", e.ToString());
-            ListenIn.Logger.Instance.Log("CUser-saveChallengeItemFeaturesHistoryToXml-" + e.ToString(), ListenIn.LoggerMessageType.Info);            
+            //ListenIn.Logger.Instance.Log("CUser-saveChallengeItemFeaturesHistoryToXml-" + e.ToString(), ListenIn.LoggerMessageType.Info);            
         }
     }
 
@@ -2193,12 +2014,12 @@ class CUser
         }
         catch (System.Xml.XmlException ex)
         {
-            ListenIn.Logger.Instance.Log("CUser-saveLexicalItem_HistoryExposure_Csv-" + ex.Message, ListenIn.LoggerMessageType.Info);
+            //ListenIn.Logger.Instance.Log("CUser-saveLexicalItem_HistoryExposure_Csv-" + ex.Message, ListenIn.LoggerMessageType.Info);
         }
         catch (Exception e)
         {
             //Console.WriteLine("The process failed: {0}", e.ToString());
-            ListenIn.Logger.Instance.Log("CUser-saveLexicalItem_HistoryExposure_Csv-" + e.ToString(), ListenIn.LoggerMessageType.Info);
+            //ListenIn.Logger.Instance.Log("CUser-saveLexicalItem_HistoryExposure_Csv-" + e.ToString(), ListenIn.LoggerMessageType.Info);
         }
     }
 

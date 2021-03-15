@@ -15,7 +15,15 @@ public class ILevel : MonoBehaviour {
 
 	public void PlayMusic(string musicToPlay, bool loop )
 	{
-		Debug.Log("Loading Music Level");
+        if (loop)
+        {
+            Debug.Log("ILevel: play level music");
+        }
+        else
+        {
+            Debug.Log("ILevel: play end music");
+        }
+
 		if(musicSound != string.Empty)
 		{
 			AudioClipInfo aci;

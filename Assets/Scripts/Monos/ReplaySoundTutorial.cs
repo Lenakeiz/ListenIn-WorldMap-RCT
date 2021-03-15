@@ -11,7 +11,7 @@ public class ReplaySoundTutorial : MonoBehaviour {
 	void OnMouseDown() {
 		if(gameController != null && Time.time - lastPlayedTime > nextThreshold)
 		{
-			nextThreshold = gameController.GetComponent<GameControlScriptTutorial>().PlayAudio(0);
+			nextThreshold = gameController.GetComponent<GameControlScriptStandard>().PlayAudioLIRO(0);
 			lastPlayedTime = Time.time;
 		}
 	}

@@ -96,4 +96,14 @@ public class DuckSimpleTargetRotation : MonoBehaviour {
         }
 
     }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 }

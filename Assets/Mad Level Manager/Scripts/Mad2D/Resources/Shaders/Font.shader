@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Tools/Mad Level Manager/Unlit/Font" {
     Properties {
         _MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
@@ -45,7 +47,7 @@ Shader "Tools/Mad Level Manager/Unlit/Font" {
  
             fragmentInput vert(vertexInput i){
                 fragmentInput o;
-                o.position = mul(UNITY_MATRIX_MVP, i.vertex);
+                o.position = UnityObjectToClipPos(i.vertex);
                 o.texcoord = i.texcoord;
                 o.color = i.color;
                 return o;

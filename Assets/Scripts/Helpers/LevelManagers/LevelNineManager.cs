@@ -12,9 +12,13 @@ public class LevelNineManager : ILevel {
 		SplineController sc = null;
 		for (int i = 0; i < donuts.Length; i++) {
 			sc = donuts[i].GetComponent<SplineController>() as SplineController;
-			sc.AutoStart = true;
-			sc.UseRigidBody = false;
-			sc.ExecuteMotion();
+
+            if (sc != null)
+            {
+                sc.AutoStart = true;
+                sc.UseRigidBody = false;
+                sc.ExecuteMotion();
+            }
 		}
 	}
 

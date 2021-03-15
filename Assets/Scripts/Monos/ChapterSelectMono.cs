@@ -28,9 +28,10 @@ public class ChapterSelectMono : MonoBehaviour {
 	private GameObject m_endPuzzleEffect;
 	public GameObject EndPuzzleEffect{ get { return m_endPuzzleEffect; } }
 
-    [SerializeField]
-    private GameObject m_DemoButton;
-    public GameObject DemoButton { get { return m_DemoButton; } }
+    //AndreaLIRO: eliminating demo from levels
+    //[SerializeField]
+    //private GameObject m_DemoButton;
+    //public GameObject DemoButton { get { return m_DemoButton; } }
     
     public void SavePinballGame()
     {
@@ -40,7 +41,7 @@ public class ChapterSelectMono : MonoBehaviour {
     private IEnumerator SaveGameState()
     {
         yield return new WaitForEndOfFrame();
-        GameStateSaver.Instance.Save();
+        GameStateSaver.Instance.SaveGameProgress();
     }
 
     //DEPRECATED

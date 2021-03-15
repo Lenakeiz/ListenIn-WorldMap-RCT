@@ -21,7 +21,10 @@ public class StateInitializePinball : State
 	// Use this for initialization
 	public override void Init()
 	{
-        Debug.Log("Entering Initialize Pinball trasition");
+        UploadManager.Instance.ResetTimer(TimerType.Pinball);
+        UploadManager.Instance.SetTimerState(TimerType.Pinball, true);
+
+        Debug.Log("StateInitializePinball: Init() Starting pinball transition");
         m_challenge_go = GameObject.FindGameObjectWithTag("Challenge");
         m_pinball_go = GameObject.FindGameObjectWithTag("PinballPrefab");
         pm = m_pinball_go.GetComponent<PinballMono>();
@@ -47,17 +50,25 @@ public class StateInitializePinball : State
 
 	}
 
-	public void StartPinball()
+    public void StartCannonEnteringAnimation()
+    {
+        PinballMono pinballmonocomponent = m_pinball_go.GetComponent<PinballMono>();
+        if (pinballmonocomponent != null){
+            pinballmonocomponent.EnterCannon();
+        }
+        else {
+            Debug.LogError("Coud not find Pinball Mono");
+        }
+    }
+
+
+    public void StartPinball()
 	{
 		if(m_challenge_go != null)
 		{
 			UnityEngine.GameObject.Destroy(m_challenge_go);
 			StatePinball.Instance.Init();
             pm.SetToAlphaFading(0.0f, false, true);
-			//pm = StatePinball.Instance.m_PinballMono;
-			//pm.SetCannonState(false);
-			//pm.SetFrameParent(false);
-			//pm.ActivateAnimationIn();
 		}
 	}
 	
@@ -69,7 +80,7 @@ public class StateInitializePinball : State
 	
 	public override void Exit()
 	{
-        Debug.Log("Exiting Initialize Pinball trasition");
-        StatePinball.Instance.InitLevelPinball();
+        Debug.Log("StateInitializePinball: Exit() Finishing transiton to pinball");
+        StatePinball.Instance.InitLevelPinball(false);
 	}
 }

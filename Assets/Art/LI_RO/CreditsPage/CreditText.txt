@@ -1,0 +1,13 @@
+Find out more about the Listen-In project here:<line-height=100%>
+<u><i><#30BEEF><link="www.ucl.ac.uk/ion/listen-in/">www.ucl.ac.uk/ion/listen-in/</link></color></i></u></align><page><line-height=180%>
+<align=center><margin=3em><b><size=+10>Credits</size></b></margin><line-height=125%></align><line-height=150%>
+<align=left>Academic researchers:</align><pos=50%>Professor Alex Leff<line-height=90%>
+<pos=50%>Dr Sonia Brownsett
+<pos=50%>Dr Victoria Fleming<line-height=125%>
+Developed by<pos=50%><b>SoftV Ltd</b>.
+Lead developer:<pos=50%>Andrea Castegnaro<line-height=125%>
+Backend developer:<pos=50%>Pedro Quijada Leyton<line-height=125%>
+Lead artist:<pos=50%>Pablo Larenas<line-height=125%>
+Artist:<pos=50%>Paul Eliasz<line-height=125%>
+CEO and creative director:<pos=50%>William Latham<page><line-height=180%>
+<align=center><margin=3em><b><size=+10>Fundings</size></b></margin><line-height=125%></align><line-height=150%>

@@ -11,7 +11,7 @@ public class ItemScript : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------
 	void Start () 
 	{
-		m_goImage = transform.FindChild("Image").gameObject;
+		m_goImage = transform.Find("Image").gameObject;
 		m_anim = GetComponent<Animator> ();
 	}	
 
@@ -28,7 +28,7 @@ public class ItemScript : MonoBehaviour {
 	public void ShowItem(bool bShow)
 	{
 		if (!m_goImage)
-			m_goImage = transform.FindChild("Image").gameObject;
+			m_goImage = transform.Find("Image").gameObject;
 
 		m_goImage.GetComponent<SpriteRenderer> ().enabled = bShow;
 

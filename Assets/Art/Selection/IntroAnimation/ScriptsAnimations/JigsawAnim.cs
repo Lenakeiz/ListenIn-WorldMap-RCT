@@ -19,7 +19,7 @@ public class JigsawAnim : MonoBehaviour {
 		aci.clipTag = string.Empty;
 		
 		string strAudio = "Sounds/Intro/LI_SFX_Intro";
-		Camera.main.GetComponent<SoundManager>().SetChannelLevel(ChannelType.LevelMusic, 5.0f);
+		Camera.main.GetComponent<SoundManager>().SetChannelLevel(ChannelType.LevelMusic, 1.0f);
 		Camera.main.GetComponent<SoundManager>().Play((Resources.Load(strAudio) as AudioClip), ChannelType.LevelMusic,aci);
 	}
 

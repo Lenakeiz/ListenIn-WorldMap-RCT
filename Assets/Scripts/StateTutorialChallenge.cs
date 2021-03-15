@@ -24,7 +24,7 @@ public class StateTutorialChallenge : State {
     {
         //Unsubscribing from the event
         m_challenge_animator.outroAnimationCompleted -= BackToWorldMenuSelect;
-        MadLevel.LoadLevelByName("World Map Select");
+        MadLevel.LoadLevelByName("MainHUB");
     }
 
     public override void Init()

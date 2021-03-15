@@ -58,7 +58,7 @@ public class StateSplash : State
 		{
 			m_gameIntro = false;
 			GoToGameIntro();
-			m_intro_go = GameObject.Instantiate(Resources.Load("Prefabs/Intro")) as GameObject;
+			m_intro_go = GameObject.Instantiate(Resources.Load("Prefabs/IntroNew")) as GameObject;
 		}
 		else if(m_mainmenu)
 		{
@@ -84,7 +84,7 @@ public class StateSplash : State
     }
     public void StartGame()
     {
-        MadLevel.LoadLevelByName("World Map Select");
+        MadLevel.LoadLevelByName("SetupScreen");
         //GameController.Instance.ChangeState(GameController.States.ChapterSelect);
         //GameController.Instance.ChangeState(GameController.States.ChapterSelect);
     }

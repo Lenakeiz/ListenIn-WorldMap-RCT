@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <node idx="0">
+    <stimulus idx="0">
+      <name>baby</name>
+      <image>37433095</image>
+      <type>target</type>
+    </stimulus>
+    <stimulus idx="1">
+      <name>buggy</name>
+      <image>27368260</image>
+      <type>S2-C</type>
+    </stimulus>
+    <stimulus idx="2">
+      <name>berry</name>
+      <image>384695</image>
+      <type>P2</type>
+    </stimulus>
+    <targetAudio>LI_2syll_Noun_m1_001</targetAudio>
+    <targetIdx>0</targetIdx>
+  </node>
+  <node idx="1">
+    <stimulus idx="0">
+      <name>water</name>
+      <image>12522351</image>
+      <type>target</type>
+    </stimulus>
+    <stimulus idx="1">
+      <name>waiter</name>
+      <image>35510165</image>
+      <type>P1</type>
+    </stimulus>
+    <stimulus idx="2">
+      <name>letter</name>
+      <image>47105947</image>
+      <type>P2</type>
+    </stimulus>
+    <stimulus idx="3">
+      <name>city</name>
+      <image>945387</image>
+      <type>Un</type>
+    </stimulus>
+    <stimulus idx="4">
+      <name>juice</name>
+      <image>467518</image>
+      <type>S2-C</type>
+    </stimulus>
+    <targetAudio>LI_2syll_Noun_m1_002</targetAudio>
+    <targetIdx>0</targetIdx>
+  </node>
+  <node idx="2">
+  	<stimulus idx="0">
+      <name>saucepan</name>
+      <image>15791161</image>
+      <type>S1-A</type>
+    </stimulus>
+    <stimulus idx="1">
+      <name>kitten</name>
+      <image>25094785</image>
+      <type>P1</type>
+    </stimulus>
+    <stimulus idx="2">
+      <name>chin</name>
+      <image>38230510</image>
+      <type>P2</type>
+    </stimulus>
+    <stimulus idx="3">
+      <name>kitchen</name>
+      <image>48976963</image>
+      <type>target</type>
+    </stimulus>
+    <stimulus idx="4">
+      <name>ketchup</name>
+      <image>34015735</image>
+      <type>S2-C</type>
+    </stimulus>
+    <stimulus idx="5">
+      <name>police</name>
+      <image>33860562</image>
+      <type>Un</type>
+    </stimulus>
+    <targetAudio>LI_2syll_Noun_m1_003</targetAudio>
+    <targetIdx>3</targetIdx>
+  </node>
+</root>

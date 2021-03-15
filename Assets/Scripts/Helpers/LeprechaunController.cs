@@ -18,6 +18,8 @@ public class LeprechaunController : MonoBehaviour, AnimationInterface {
 	}
 	public AnimationClipStat[] clipStats;
 
+    public SpriteRenderer globe;
+
 	private Dictionary<string,AnimationClip> clips;
 
 	public void Play (string triggerName)
@@ -33,13 +35,17 @@ public class LeprechaunController : MonoBehaviour, AnimationInterface {
 
 	}
 
+    public void AdjustLayers()
+    {
+        globe.sortingOrder = 30;
+    }
+
 	public float AnimationLength (string animationName)
 	{
 		AnimationClip ac;
 		float length = 0;
 		if(clips != null && clips.ContainsKey(animationName))
 		{
-
 			clips.TryGetValue(animationName, out ac);
 			length = ac.length;
 		}

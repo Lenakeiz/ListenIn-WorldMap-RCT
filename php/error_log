@@ -1,0 +1,6 @@
+[18-Nov-2018 12:49:09 America/New_York] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'softrsav_li@softvtech.website'@'localhost' (using password: YES)' in /home/softrsav/public_html/ListenIn/php/conn.php:2
+Stack trace:
+#0 /home/softrsav/public_html/ListenIn/php/conn.php(2): PDO->__construct('mysql:dbname=so...', 'softrsav_li@sof...', 'softvli')
+#1 /home/softrsav/public_html/ListenIn/php/login.php(2): include('/home/softrsav/...')
+#2 {main}
+  thrown in /home/softrsav/public_html/ListenIn/php/conn.php on line 2

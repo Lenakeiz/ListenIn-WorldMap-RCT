@@ -12,25 +12,29 @@ public class CheatLoader : MonoBehaviour {
 
 	}
 
-	public void ControlAccessToDebugMenu()
-	{
-		clickedCount++;
+    /// <summary>
+    /// AndreaLIRO: this lead to nowhere now. Check if can be deleted
+    /// </summary>
+	//public void ControlAccessToDebugMenu()
+	//{
+	//	clickedCount++;
 
-		if(clickedCount > 7 && gameObject.GetComponent<ShowPanels>().inChallengeMenu)
-		{
-			//Show Debug Menu
-			gameObject.GetComponent<ShowPanels>().ShowDebugMenu();
-			GameObject.Find("Challenge(Clone)").GetComponentInChildren<GameControlScript>().SetLevelMenu(true);
-			clickedCount = 0;
-		}
-	}
+	//	if(clickedCount > 7 && gameObject.GetComponent<ShowPanels>().inChallengeMenu)
+	//	{
+	//		//Show Debug Menu
+	//		gameObject.GetComponent<ShowPanels>().ShowDebugMenu();
+	//		GameObject.Find("Challenge(Clone)").GetComponentInChildren<GameControlScript>().SetLevelMenu(true);
+	//		clickedCount = 0;
+	//	}
+	//}
 
+    //No references anymore.
 	public void Cheat()
 	{
 		StateChallenge.Instance.cheatActivated = true;
 		GameObject.Find("Main Camera").GetComponent<SoundManager>().Stop(ChannelType.BackgroundNoise);
 		GameController.Instance.ChangeState(GameController.States.StatePinball);
-		StatePinball.Instance.InitLevelPinball();
+		StatePinball.Instance.InitLevelPinball(true);
 	}
 
 	public void AddCoinsToCurrentChallenge()
